@@ -229,7 +229,7 @@ class ShareViewController: UIViewController {
             for (var i: Int = 0; i < includedSocialNetworks.count; i++) {
                 let network = includedSocialNetworks[i]
                 
-                let updateUI = {[weak self] (state: SocialOperationState) -> Void in
+                let updateUI = {[weak self] (state: SocialOperationState, isFinished: Bool) -> Void in
                     
                     if let sself = self {
                         if let index = sself.socialNetworks.indexOf({$0 == network }) {
@@ -241,18 +241,18 @@ class ShareViewController: UIViewController {
                         }
                     }
                     
-                    if state != .Waiting && state != .Sending {
+                    if isFinished == true {
                         completionHandler()
                     }
                 }
                 
                 let operation = network.postDataToWall(self.message.text, image: self.message.image, url: self.message.url, completion: { (result) -> Void in
-                        updateUI(network.socialNetworkState.operationPostToWall!.state)
+                    updateUI(network.socialNetworkState.operationPostToWall!.state, true)
                     }, failure: { (error, isCancelled) -> Void in
-                        updateUI(network.socialNetworkState.operationPostToWall!.state)
+                        updateUI(network.socialNetworkState.operationPostToWall!.state, true)
                 })
                 operation.didChangeState = {(newState) -> Void in
-                    updateUI(newState)
+                    updateUI(newState, false)
                 }
                 network.socialNetworkState.operationPostToWall = operation
             }

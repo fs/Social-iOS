@@ -88,10 +88,7 @@ extension UIImage {
         
         let originalWidth  = size.width
         let originalHeight = size.height
-        
-        print(originalWidth)
-        print(originalHeight)
-        
+
         var edge: CGFloat
         if originalWidth > originalHeight {
             edge = originalHeight
@@ -103,7 +100,6 @@ extension UIImage {
         let posY = floor((originalHeight - edge) / 2.0)
         
         let cropSquare = CGRectMake(posX, posY, edge, edge)
-        print(cropSquare)
         
         if let imageRef = CGImageCreateWithImageInRect(resizedImage.CGImage, cropSquare) {
             return UIImage(CGImage: imageRef)

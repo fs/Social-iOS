@@ -23,6 +23,7 @@
 		E763D01F1B920CB600726250 /* Social+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763D01E1B920CB600726250 /* Social+UIImage.swift */; };
 		E7684BFF1B99B70C00004581 /* SocialTwitterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7684BFE1B99B70C00004581 /* SocialTwitterActions.swift */; settings = {ASSET_TAGS = (); }; };
 		E7684C031B99DE2000004581 /* SocialVKActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7684C021B99DE2000004581 /* SocialVKActions.swift */; settings = {ASSET_TAGS = (); }; };
+		E79861011BAAF9460052A4E3 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79861001BAAF9460052A4E3 /* SocialHelper.swift */; settings = {ASSET_TAGS = (); }; };
 		E7CD45951B978C99009B2EBB /* SocialActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD45941B978C99009B2EBB /* SocialActions.swift */; };
 		E7D253D11B9836BA00B0BD7E /* SocialNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D253D01B9836BA00B0BD7E /* SocialNetworkManager.swift */; };
 		E7D253D71B9844E600B0BD7E /* SocialFacebookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D253D61B9844E600B0BD7E /* SocialFacebookActions.swift */; };
@@ -61,6 +62,7 @@
 		E763D01E1B920CB600726250 /* Social+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Social+UIImage.swift"; sourceTree = "<group>"; };
 		E7684BFE1B99B70C00004581 /* SocialTwitterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialTwitterActions.swift; sourceTree = "<group>"; };
 		E7684C021B99DE2000004581 /* SocialVKActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVKActions.swift; sourceTree = "<group>"; };
+		E79861001BAAF9460052A4E3 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
 		E7CD45941B978C99009B2EBB /* SocialActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialActions.swift; sourceTree = "<group>"; };
 		E7D253D01B9836BA00B0BD7E /* SocialNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworkManager.swift; sourceTree = "<group>"; };
 		E7D253D61B9844E600B0BD7E /* SocialFacebookActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFacebookActions.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				E763D0131B920BAE00726250 /* SocialConstants.swift */,
 				E763D01E1B920CB600726250 /* Social+UIImage.swift */,
+				E79861001BAAF9460052A4E3 /* SocialHelper.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				E763D01D1B920BAE00726250 /* SocialTwitter.swift in Sources */,
 				E729BDE41B94E71200022C6D /* SocialVK.swift in Sources */,
 				E763D01B1B920BAE00726250 /* SocialFacebook.swift in Sources */,
+				E79861011BAAF9460052A4E3 /* SocialHelper.swift in Sources */,
 				E763D0191B920BAE00726250 /* SocialConstants.swift in Sources */,
 				E729BDE71B94E7A800022C6D /* RNLeftAndRightHeaderFooterView.swift in Sources */,
 			);

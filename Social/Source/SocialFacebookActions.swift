@@ -36,7 +36,6 @@ final class FacebookPostToWallOperation : SocialOperation {
     let socialData: FacebookSocialData
     
     private weak var connection: FBRequestConnection?
-    private var semaphore: dispatch_semaphore_t!
     
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: FacebookSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
     override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
@@ -53,7 +52,7 @@ final class FacebookPostToWallOperation : SocialOperation {
             
             self.setSendingState()
             
-            self.semaphore      = dispatch_semaphore_create(0)
+            let semaphore      = dispatch_semaphore_create(0)
             let data            = self.socialData
             var graphPath       = "me/feed"
             
@@ -113,16 +112,16 @@ final class FacebookPostToWallOperation : SocialOperation {
                             let success = (error == nil)
                             if success {
                                 sself.setSuccessedState(result)
-                            } else {
+                            } else if sself.state != .Cancelled {
                                 sself.setFailedState(error)
                             }
-                            dispatch_semaphore_signal(sself.semaphore)
                         }
+                        dispatch_semaphore_signal(semaphore)
                     }
                 }
             })
             
-            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER)
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         } else {
             self.setFailedState(NSError.userNotAuthorizedError())
         }
