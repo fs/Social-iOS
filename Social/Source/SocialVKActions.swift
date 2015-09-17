@@ -34,7 +34,6 @@ final class VKPostToWallOperation : SocialOperation {
     let socialData: VKSocialData
     
     private weak var request: VKRequest?
-    private var semaphore: dispatch_semaphore_t!
     
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
     override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
@@ -52,21 +51,21 @@ final class VKPostToWallOperation : SocialOperation {
             self.setSendingState()
             
             let socialData = self.socialData
-            self.semaphore = dispatch_semaphore_create(0)
+            let semaphore = dispatch_semaphore_create(0)
             
             let postToWallHandler = {[weak self] (photos: [VKPhoto]?) -> Void in
                     
                 self?.request = VKPostToWallOperation.postToWall(socialData.text, url: socialData.url, photos: photos, completion: {[weak self] (result, error) -> Void in
                     
-                    let success = (error == nil)
                     if let sself = self {
+                        let success = (error == nil)
                         if success == true {
                             sself.setSuccessedState(result)
                         } else {
                             sself.setFailedState(error)
                         }
-                        dispatch_semaphore_signal(sself.semaphore)
                     }
+                    dispatch_semaphore_signal(semaphore)
                 })
             }
             
@@ -77,17 +76,17 @@ final class VKPostToWallOperation : SocialOperation {
                     if success {
                         postToWallHandler(photos)
                     } else {
-                        if let sself = self {
-                            dispatch_semaphore_signal(sself.semaphore)
+                        if let sself = self where sself.state != .Cancelled {
                             sself.setFailedState(error)
                         }
+                        dispatch_semaphore_signal(semaphore)
                     }
                 })
             } else {
                 postToWallHandler(nil)
             }
             
-            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER)
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
             
         } else {
             self.setFailedState(NSError.userNotAuthorizedError())

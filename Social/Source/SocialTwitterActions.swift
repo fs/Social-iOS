@@ -36,8 +36,6 @@ final class TwitterPostToWallOperation : SocialOperation {
     
     let socialData: TwitterSocialData
     
-    private var semaphore: dispatch_semaphore_t!
-    
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
     override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         fatalError("It doesn't work")
@@ -53,7 +51,7 @@ final class TwitterPostToWallOperation : SocialOperation {
             self.setSendingState()
             
             let socialData = self.socialData
-            self.semaphore = dispatch_semaphore_create(0)
+            let semaphore = dispatch_semaphore_create(0)
             
             let updateStatusHandler = {(imagesIDs: [String]?) -> Void in
                 
@@ -69,12 +67,12 @@ final class TwitterPostToWallOperation : SocialOperation {
                             } catch let jsonError as NSError {
                                 sself.setFailedState(jsonError)
                             }
-                        } else {
-                            print(error)
+                        } else if sself.state != .Cancelled {
                             sself.setFailedState(error)
                         }
-                        dispatch_semaphore_signal(sself.semaphore)
                     }
+                    
+                    dispatch_semaphore_signal(semaphore)
                 })
             }
             
@@ -96,13 +94,12 @@ final class TwitterPostToWallOperation : SocialOperation {
                                 updateStatusHandler(imagesIDs)
                             } catch let jsonError as NSError {
                                 sself.setFailedState(jsonError)
-                                dispatch_semaphore_signal(sself.semaphore)
+                                dispatch_semaphore_signal(semaphore)
                             }
 
-                        } else {
-                            print(error)
+                        } else if sself.state != .Cancelled {
                             sself.setFailedState(error)
-                            dispatch_semaphore_signal(sself.semaphore)
+                            dispatch_semaphore_signal(semaphore)
                         }
                     }
                 })
@@ -110,7 +107,7 @@ final class TwitterPostToWallOperation : SocialOperation {
                 updateStatusHandler(nil)
             }
             
-            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER)
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         } else {
             self.setFailedState(NSError.userNotAuthorizedError())
         }

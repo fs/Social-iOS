@@ -42,7 +42,7 @@ extension TwitterNetwork: SocialNetwork {
             return (Twitter.sharedInstance().session() != nil)
         }
 
-        return self.performInMainThread(isAuthorized) as! Bool
+        return self.tw_performInMainThread(isAuthorized) as! Bool
     }
     
     class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
@@ -63,7 +63,7 @@ extension TwitterNetwork: SocialNetwork {
             return nil
         }
         
-        self.performInMainThread(openSession)
+        self.tw_performInMainThread(openSession)
     }
     
     class func logout() {
@@ -74,7 +74,7 @@ extension TwitterNetwork: SocialNetwork {
                 return nil
             }
             
-            self.performInMainThread(logout)
+            self.tw_performInMainThread(logout)
         }
     }
 }
@@ -87,10 +87,10 @@ extension TwitterNetwork {
             return Twitter.sharedInstance().APIClient
         }
         
-        return TwitterNetwork.performInMainThread(getAPIClient) as! TWTRAPIClient
+        return TwitterNetwork.tw_performInMainThread(getAPIClient) as! TWTRAPIClient
     }
     
-    internal class func performInMainThread(action:(() -> AnyObject?)) -> AnyObject? {
+    internal class func tw_performInMainThread(action:(() -> AnyObject?)) -> AnyObject? {
         var result: AnyObject? = nil
         if NSThread.isMainThread() {
             result = action()

@@ -36,8 +36,7 @@ class SocialOperation: NSOperation {
     
     private(set) var state : SocialOperationState = .Waiting {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) {[weak self] () -> Void in
-                
+            social_performInMainThreadSync {[weak self] () -> Void in
                 if let sself = self {
                     sself.didChangeState?(newState: sself.state)
                 }
@@ -75,23 +74,25 @@ class SocialOperation: NSOperation {
         let newState = SocialOperationState.Successed
         self.validateNewState(newState)
         
-        self.state = newState
         self.result = result
-        self.completion?(result: result)
+        self.state = newState
+        
+        social_performInMainThreadSync {[weak self] () -> Void in
+            self?.completion?(result: result)
+        }
     }
     
     internal final func setFailedState(error: NSError?) {
         
-        if self.state == .Cancelled {
-            return
-        }
-        
         let newState = SocialOperationState.Failed
         self.validateNewState(newState)
         
-        self.state = newState
         self.error = error
-        self.failure?(error: error, isCancelled: false)
+        self.state = newState
+        
+        social_performInMainThreadSync {[weak self] () -> Void in
+            self?.failure?(error: error, isCancelled: false)
+        }
     }
     
     //MARK: - override
@@ -100,7 +101,10 @@ class SocialOperation: NSOperation {
         self.validateNewState(newState)
         
         self.state = newState
-        self.failure?(error: nil, isCancelled: true)
+        
+        social_performInMainThreadSync {[weak self] () -> Void in
+            self?.failure?(error: nil, isCancelled: true)
+        }
         
         super.cancel()
     }
