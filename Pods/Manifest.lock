@@ -12,9 +12,9 @@ PODS:
   - Facebook-iOS-SDK (3.23.2):
     - Bolts (~> 1.0)
   - twitter-text (1.13.0)
-  - TwitterCore (1.10.1)
-  - TwitterKit (1.10.1)
-  - VK-ios-sdk (1.2.0)
+  - TwitterCore (1.11.0)
+  - TwitterKit (1.11.0)
+  - VK-ios-sdk (1.2.2)
 
 DEPENDENCIES:
   - Crashlytics
@@ -31,8 +31,8 @@ SPEC CHECKSUMS:
   Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   twitter-text: 60d0816a5b1ae7331bdda54ba15f0da974286177
-  TwitterCore: 632e809318be9ea2b6f38cc21611033367681adc
-  TwitterKit: b3f09aaef09ae9339f02a48f6c0adb1b09156079
-  VK-ios-sdk: 809c4cdb5706545bcc235d385b23d87b24391980
+  TwitterCore: 968f699142e622d3007fd5ab4d9d3cf92616d527
+  TwitterKit: 24f8f5b5bbd74d9f33c34b69dcc6fbc00266e1a4
+  VK-ios-sdk: f4b7df0d4e277e06d60fef6dc472be4260eeda6d
 
 COCOAPODS: 0.38.2
