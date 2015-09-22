@@ -512,10 +512,12 @@ extension ShareViewController: UITableViewDataSource {
                     let cell = tableView.dequeueReusableCellWithIdentifier("SocialNetworkEnablingCell") as! SocialNetworkEnablingCell
                     cell.socialNetworkLabel.text        = name
                     cell.enabledSwitchView.on           = socialNetwork.socialNetworkState.isNeedToSend
-                    cell.didTouchSwitchHandler          = {(on: Bool) -> Void in
+                    cell.didTouchSwitchHandler          = {[weak self] (on: Bool) -> Void in
                         
-                        let socialNetwork = self.socialNetworks[indexPath.row]
-                        socialNetwork.socialNetworkState.isNeedToSend  = on
+                        if let sself = self {
+                            let socialNetwork = sself.socialNetworks[indexPath.row]
+                            socialNetwork.socialNetworkState.isNeedToSend  = on
+                        }
                     }
                     return cell
                 }
