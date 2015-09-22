@@ -96,7 +96,7 @@ final class TwitterPostToWallOperation : SocialOperation {
                                 sself.setFailedState(jsonError)
                                 dispatch_semaphore_signal(semaphore)
                             }
-
+                            
                         } else if sself.state != .Cancelled {
                             sself.setFailedState(error)
                             dispatch_semaphore_signal(semaphore)
@@ -136,7 +136,7 @@ extension TwitterPostToWallOperation {
         var parameters                  = Dictionary<String, AnyObject>()
         let imageData                   = twitterImage.representationHandler(image: image)
         
-        assert(imageData.length <= 3 * 1024 * 1024 /*5 mb max size of a image*/, "Max size of \(twitterImage.image) more 5 mb")
+        assert(imageData.length <= 3 * 1024 * 1024 /*3 mb max size of a image*/, "Max size of \(twitterImage.image) more 3 mb")
         
         parameters["media"]             = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
         
@@ -159,7 +159,8 @@ extension TwitterPostToWallOperation {
             message += "\n\(url)"
         }
         
-        assert(TwitterText.tweetLength(message) <= 140, "Too long message \(message). Max length 140 symbols")
+        let tweetLength = TwitterText.tweetLength(message)
+        assert(tweetLength <= 140, "Too long the message for Twitter. Max length 140 symbols but it is \(tweetLength) length. \r\n \(message)")
         
         parameters["status"]        = message
         parameters["trim_user"]     = "true"
