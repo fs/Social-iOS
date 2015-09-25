@@ -43,6 +43,7 @@
  5. В ```Roles``` приглашаем как ```Administrators``` [Никиту Фомина](https://www.facebook.com/nikita.fomin.96), [Сергея Николаева](https://www.facebook.com/sergei.nikolaev.5) и [Гончарова Владимира](https://www.facebook.com/vladimir1631).
 
 **iOS 9:**
+
 [Для настройки iOS 9](https://developers.facebook.com/docs/ios/ios9)
 
 **Необходимый код:**
@@ -130,6 +131,8 @@
 	</dict>
 ```
 
+[Более детальная информация](https://dev.twitter.com/mopub/ios/ios9)
+
 **Необходимый код:**
 
 		//setting Fabric
@@ -166,7 +169,7 @@
 
 **iOS 9:**
 
-Не было замечено проблем с API
+[Для настройки iOS 9](https://github.com/VKCOM/vk-ios-sdk#configuring-application-for-ios-9)
 
 **Необходимый код:**
 
