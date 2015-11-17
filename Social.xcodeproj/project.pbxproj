@@ -254,6 +254,7 @@
 				E763CFDB1B91FE4700726250 /* Resources */,
 				32B5C148404CBEF4FB523FCB /* Copy Pods Resources */,
 				E7684C001B99D3DF00004581 /* Fabric */,
+				E73E5CEF1BFB67F50051611C /* WARNING */,
 			);
 			buildRules = (
 			);
@@ -371,6 +372,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		E73E5CEF1BFB67F50051611C /* WARNING */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = WARNING;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\nTAGS=\"WARNING:|TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\nfi";
 		};
 		E7684C001B99D3DF00004581 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
