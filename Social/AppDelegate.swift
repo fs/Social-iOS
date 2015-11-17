@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         Twitter.sharedInstance().startWithConsumerKey("x0Ao3SWSmX6Xm7Mjqg3Q8Ykgg", consumerSecret: "x62gj7RL45ZkmUI8lTLYRGDWDlaLCbNBQuKCYqbznX0aSKqcyt")
+        
         //setting Fabric
         Fabric.with([Crashlytics.self(), Twitter.self()])
         
         //setting VK
-        VKSdk.initializeWithDelegate(self, andAppId: "5057927")
-        VKSdk.wakeUpSession()
+        VKSdk.initializeWithAppId("5057927")
         
         return true
     }
@@ -68,32 +68,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-//MARK: -
-extension AppDelegate : VKSdkDelegate {
-    
-    func vkSdkReceivedNewToken(newToken: VKAccessToken!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kVKDidUpdateTokenNotification, object: newToken)
-    }
-    
-    func vkSdkRenewedToken(newToken: VKAccessToken!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kVKDidUpdateTokenNotification, object: newToken)
-    }
-    
-    func vkSdkUserDeniedAccess(authorizationError: VKError!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kVKDeniedAccessNotification, object: authorizationError)
-    }
-    
-    func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kVKHasExperiedTokenNotification, object: expiredToken)
-    }
-    
-    func vkSdkShouldPresentViewController(controller: UIViewController!) {
-        self.window?.rootViewController?.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
-        let captchaController        = VKCaptchaViewController.captchaControllerWithError(captchaError)
-        self.window?.rootViewController?.presentViewController(captchaController, animated: true, completion: nil)
-    }
-    
-}

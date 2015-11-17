@@ -21,12 +21,12 @@
 		E763D01B1B920BAE00726250 /* SocialFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763D0151B920BAE00726250 /* SocialFacebook.swift */; };
 		E763D01D1B920BAE00726250 /* SocialTwitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763D0171B920BAE00726250 /* SocialTwitter.swift */; };
 		E763D01F1B920CB600726250 /* Social+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763D01E1B920CB600726250 /* Social+UIImage.swift */; };
-		E7684BFF1B99B70C00004581 /* SocialTwitterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7684BFE1B99B70C00004581 /* SocialTwitterActions.swift */; settings = {ASSET_TAGS = (); }; };
-		E7684C031B99DE2000004581 /* SocialVKActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7684C021B99DE2000004581 /* SocialVKActions.swift */; settings = {ASSET_TAGS = (); }; };
-		E79861011BAAF9460052A4E3 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79861001BAAF9460052A4E3 /* SocialHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		E7684C031B99DE2000004581 /* SocialVKActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7684C021B99DE2000004581 /* SocialVKActions.swift */; };
+		E79861011BAAF9460052A4E3 /* SocialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79861001BAAF9460052A4E3 /* SocialHelper.swift */; };
 		E7CD45951B978C99009B2EBB /* SocialActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CD45941B978C99009B2EBB /* SocialActions.swift */; };
 		E7D253D11B9836BA00B0BD7E /* SocialNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D253D01B9836BA00B0BD7E /* SocialNetworkManager.swift */; };
-		E7D253D71B9844E600B0BD7E /* SocialFacebookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D253D61B9844E600B0BD7E /* SocialFacebookActions.swift */; };
+		E7F384A91BFB4B310086EB70 /* SocialFacebookActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F384A81BFB4B310086EB70 /* SocialFacebookActions.swift */; };
+		E7F384AB1BFB4BAA0086EB70 /* SocialTwitterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F384AA1BFB4BAA0086EB70 /* SocialTwitterActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +60,12 @@
 		E763D0151B920BAE00726250 /* SocialFacebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFacebook.swift; sourceTree = "<group>"; };
 		E763D0171B920BAE00726250 /* SocialTwitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialTwitter.swift; sourceTree = "<group>"; };
 		E763D01E1B920CB600726250 /* Social+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Social+UIImage.swift"; sourceTree = "<group>"; };
-		E7684BFE1B99B70C00004581 /* SocialTwitterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialTwitterActions.swift; sourceTree = "<group>"; };
 		E7684C021B99DE2000004581 /* SocialVKActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVKActions.swift; sourceTree = "<group>"; };
 		E79861001BAAF9460052A4E3 /* SocialHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialHelper.swift; sourceTree = "<group>"; };
 		E7CD45941B978C99009B2EBB /* SocialActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialActions.swift; sourceTree = "<group>"; };
 		E7D253D01B9836BA00B0BD7E /* SocialNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworkManager.swift; sourceTree = "<group>"; };
-		E7D253D61B9844E600B0BD7E /* SocialFacebookActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFacebookActions.swift; sourceTree = "<group>"; };
+		E7F384A81BFB4B310086EB70 /* SocialFacebookActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialFacebookActions.swift; sourceTree = "<group>"; };
+		E7F384AA1BFB4BAA0086EB70 /* SocialTwitterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialTwitterActions.swift; sourceTree = "<group>"; };
 		F0B4F2E4AB9177776E64DDFF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -180,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				E763D0171B920BAE00726250 /* SocialTwitter.swift */,
-				E7684BFE1B99B70C00004581 /* SocialTwitterActions.swift */,
+				E7F384AA1BFB4BAA0086EB70 /* SocialTwitterActions.swift */,
 			);
 			name = Twitter;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				E763D0151B920BAE00726250 /* SocialFacebook.swift */,
-				E7D253D61B9844E600B0BD7E /* SocialFacebookActions.swift */,
+				E7F384A81BFB4B310086EB70 /* SocialFacebookActions.swift */,
 			);
 			name = Facebook;
 			sourceTree = "<group>";
@@ -393,11 +393,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D253D71B9844E600B0BD7E /* SocialFacebookActions.swift in Sources */,
-				E7684BFF1B99B70C00004581 /* SocialTwitterActions.swift in Sources */,
 				E763D0031B91FF8D00726250 /* ShareViewController.swift in Sources */,
 				E763D0181B920BAE00726250 /* Social.swift in Sources */,
 				E7D253D11B9836BA00B0BD7E /* SocialNetworkManager.swift in Sources */,
+				E7F384AB1BFB4BAA0086EB70 /* SocialTwitterActions.swift in Sources */,
 				E7684C031B99DE2000004581 /* SocialVKActions.swift in Sources */,
 				E763CFE31B91FE4700726250 /* AppDelegate.swift in Sources */,
 				E7CD45951B978C99009B2EBB /* SocialActions.swift in Sources */,
@@ -405,6 +404,7 @@
 				E763D01D1B920BAE00726250 /* SocialTwitter.swift in Sources */,
 				E729BDE41B94E71200022C6D /* SocialVK.swift in Sources */,
 				E763D01B1B920BAE00726250 /* SocialFacebook.swift in Sources */,
+				E7F384A91BFB4B310086EB70 /* SocialFacebookActions.swift in Sources */,
 				E79861011BAAF9460052A4E3 /* SocialHelper.swift in Sources */,
 				E763D0191B920BAE00726250 /* SocialConstants.swift in Sources */,
 				E729BDE71B94E7A800022C6D /* RNLeftAndRightHeaderFooterView.swift in Sources */,
@@ -528,7 +528,7 @@
 			baseConfigurationReference = 82F08AA772162FE63D60D097 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Social/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -544,7 +544,7 @@
 			baseConfigurationReference = 9C262E353BA71D6A9A06BDDD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Social/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

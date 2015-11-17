@@ -80,9 +80,8 @@ extension FacebookNetwork: SocialNetwork {
         
         let session = FBSession(permissions: ["email", "public_profile", "publish_actions"])
         FBSession.setActiveSession(session)
-        session.openWithCompletionHandler({ (session: FBSession!, state: FBSessionState, error: NSError!) -> Void in
-            
-            switch state
+        session.openWithCompletionHandler { (session, status, error) -> Void in
+            switch status
             {
             case .Open, .OpenTokenExtended:
                 completion?(success: true, error: nil)
@@ -90,7 +89,7 @@ extension FacebookNetwork: SocialNetwork {
             default:
                 completion?(success: false, error: error)
             }
-        })
+        }
     }
 }
 
