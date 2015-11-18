@@ -1,5 +1,4 @@
 import UIKit
-import TwitterKit
 
 //MARK: - TwitterSocialData and metadata
 final class TwitterSocialData: SocialData {
@@ -31,6 +30,7 @@ class TwitterNetwork: NSObject {
     }
 }
 
+//MARK: - SocialNetwork
 extension TwitterNetwork: SocialNetwork {
     
     class func name() -> String {
@@ -39,7 +39,7 @@ extension TwitterNetwork: SocialNetwork {
     
     class func isAuthorized() -> Bool {
         let isAuthorized = {() -> AnyObject? in
-            return (Twitter.sharedInstance().session() != nil)
+            return (Twitter.sharedInstance().sessionStore.session() != nil)
         }
 
         return self.tw_performInMainThread(isAuthorized) as! Bool
@@ -55,7 +55,7 @@ extension TwitterNetwork: SocialNetwork {
     
     private class func openNewSession(completion: ((success: Bool, error: NSError?) -> Void)?) {
         let openSession = {() -> AnyObject? in
-
+            
             Twitter.sharedInstance().logInWithCompletion({ (session, error) -> Void in
                 completion?(success: error == nil, error: error)
             })
@@ -79,15 +79,16 @@ extension TwitterNetwork: SocialNetwork {
     }
 }
 
+//MARK: -
 extension TwitterNetwork {
     
-    internal class func getAPIClient() -> TWTRAPIClient! {
+    internal class func getAPIClient() -> TWTRAPIClient? {
         
         let getAPIClient = {() -> AnyObject? in
-            return Twitter.sharedInstance().APIClient
+            return TWTRAPIClient.init(userID: Twitter.sharedInstance().sessionStore.session()?.userID)
         }
         
-        return TwitterNetwork.tw_performInMainThread(getAPIClient) as! TWTRAPIClient
+        return TwitterNetwork.tw_performInMainThread(getAPIClient) as? TWTRAPIClient
     }
     
     internal class func tw_performInMainThread(action:(() -> AnyObject?)) -> AnyObject? {
@@ -101,5 +102,13 @@ extension TwitterNetwork {
         }
         
         return result
+    }
+}
+
+//MARK: -
+extension NSError {
+    internal class func tw_getAPIClientError() -> NSError {
+        
+        return NSError.init(domain: "com.TwitterNetwork", code: -100, userInfo: [NSLocalizedDescriptionKey : "API client can not initialization"])
     }
 }

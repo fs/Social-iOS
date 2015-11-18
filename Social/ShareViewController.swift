@@ -173,7 +173,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private let socialNetworks: [ShareSocialNetwork] = [FacebookNetwork(), TwitterNetwork(), VKNetwork()]
+    private lazy var socialNetworks: [ShareSocialNetwork] = { return [FacebookNetwork(), TwitterNetwork(), VKNetwork()] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
@@ -232,7 +232,9 @@ class ShareViewController: UIViewController {
                 let updateUI = {[weak self] (isFinished: Bool) -> Void in
                     
                     if let sself = self {
-                        if let index = sself.socialNetworks.indexOf({$0 == network }) {
+                        
+                        if let index = sself.socialNetworks.indexOf({ (socialNetwork) -> Bool in
+                            return socialNetwork == network }) {
                             sself.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: socialsSection)], withRowAnimation: UITableViewRowAnimation.Automatic)
                         }
                         
@@ -248,7 +250,8 @@ class ShareViewController: UIViewController {
                 
                 let operation = network.postDataToWall(self.message.text, image: self.message.image, url: self.message.url, completion: { (result) -> Void in
                     updateUI(true)
-                    }, failure: { (error, isCancelled) -> Void in
+                    }, failure: { (operation, error, isCancelled) -> Void in
+                        print(error)
                         updateUI(true)
                 })
                 operation.didChangeState = {(newState) -> Void in
@@ -472,7 +475,6 @@ extension ShareViewController: UITableViewDataSource {
                 cell.didTouchConnectHandler         = { () -> Void in
                     
                     socialNetwork.dynamicType.authorization({[weak self] (success, error) -> Void in
-                        
                         if let sself = self where success == true {
                             if let indexPath = sself.tableView.indexPathForCell(cell) {
                                 sself.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)

@@ -2,7 +2,7 @@ import Foundation
 
 extension VKNetwork: PostToWallAction {
     
-    func postDataToWall<T: AnyObject where T: SocialData>(socialData: T, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
         if let vkSocialData = socialData as? VKSocialData {
             let operation = VKPostToWallOperation(socialData: vkSocialData, completion: completion, failure: failure)
@@ -111,8 +111,8 @@ extension VKPostToWallOperation {
             //rotate image
             image = image.social_resize(image.size)
         }
-        
-        let request = VKApi.uploadWallPhotoRequest(image, parameters: vkImage.parameters, userId: Int(VKSdk.getAccessToken().userId)!, groupId: 0)
+
+        let request = VKApi.uploadWallPhotoRequest(image, parameters: vkImage.parameters, userId: Int(VKSdk.accessToken().userId)!, groupId: 0)
         
         request.executeWithResultBlock({ (respone: VKResponse!) -> Void in
             

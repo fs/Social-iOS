@@ -1,38 +1,41 @@
 PODS:
-  - Bolts (1.2.2):
-    - Bolts/AppLinks (= 1.2.2)
-    - Bolts/Tasks (= 1.2.2)
-  - Bolts/AppLinks (1.2.2):
+  - Bolts (1.5.0):
+    - Bolts/AppLinks (= 1.5.0)
+    - Bolts/Tasks (= 1.5.0)
+  - Bolts/AppLinks (1.5.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.2.2)
-  - Crashlytics (3.3.1)
-  - Fabric (1.5.1):
-    - Fabric/Base (= 1.5.1)
-  - Fabric/Base (1.5.1)
-  - Facebook-iOS-SDK (3.23.2):
-    - Bolts (~> 1.0)
+  - Bolts/Tasks (1.5.0)
+  - Crashlytics (3.4.0):
+    - Fabric (~> 1.6.0)
+  - Fabric (1.6.0):
+    - Fabric/Base (= 1.6.0)
+  - Fabric/Base (1.6.0)
+  - Facebook-iOS-SDK (3.24.1):
+    - Bolts (~> 1.2)
   - twitter-text (1.13.0)
-  - TwitterCore (1.11.0)
-  - TwitterKit (1.11.0)
-  - VK-ios-sdk (1.2.2)
+  - TwitterCore (1.13.1):
+    - Fabric
+  - TwitterKit (1.13.1):
+    - TwitterCore (= 1.13.1)
+  - VK-ios-sdk (1.3.7)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
-  - Facebook-iOS-SDK (~> 3.23.0)
+  - Facebook-iOS-SDK (~> 3.24.1)
   - twitter-text
   - TwitterCore
   - TwitterKit
   - VK-ios-sdk
 
 SPEC CHECKSUMS:
-  Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
-  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
-  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
-  Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
+  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
+  Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   twitter-text: 60d0816a5b1ae7331bdda54ba15f0da974286177
-  TwitterCore: 968f699142e622d3007fd5ab4d9d3cf92616d527
-  TwitterKit: 24f8f5b5bbd74d9f33c34b69dcc6fbc00266e1a4
-  VK-ios-sdk: f4b7df0d4e277e06d60fef6dc472be4260eeda6d
+  TwitterCore: 4f6fbd413f6d574d38bfbeeeb5cd75738caf567e
+  TwitterKit: 77ee49981d79c9663eae3920641addf7c8713b38
+  VK-ios-sdk: 8ea0cf090b6b45d4682591f203d2a53d2f724328
 
 COCOAPODS: 0.38.2

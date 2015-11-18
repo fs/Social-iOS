@@ -20,9 +20,9 @@ final class SocialImage {
 
 
 //MARK: - PostToWallAction
-protocol PostToWallAction {
+protocol PostToWallAction: NSObjectProtocol {
     
-    func postDataToWall<T: AnyObject where T: SocialData>(socialData: T, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation
+    func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation
     
     func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation
 }

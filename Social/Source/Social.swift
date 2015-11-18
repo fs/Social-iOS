@@ -28,18 +28,17 @@ enum SocialOperationState {
     case Cancelled
 }
 
-typealias SocialOperationCompletionBlock = ((result: AnyObject?) -> Void)?
-typealias SocialOperationDidChangeStateBlock = ((newState: SocialOperationState) -> Void)?
-typealias SocialOperationFailureBlock = ((error: NSError?, isCancelled: Bool) -> Void)?
+typealias SocialOperationCompletionBlock        = (operation: SocialOperation, result: AnyObject?) -> Void
+typealias SocialOperationDidChangeStateBlock    = (operation: SocialOperation, newState: SocialOperationState) -> Void
+typealias SocialOperationFailureBlock           = (operation: SocialOperation, error: NSError?, isCancelled: Bool) -> Void
 
 class SocialOperation: NSOperation {
     
     private(set) var state : SocialOperationState = .Waiting {
         didSet {
             social_performInMainThreadSync {[weak self] () -> Void in
-                if let sself = self {
-                    sself.didChangeState?(newState: sself.state)
-                }
+                guard let sself = self else { return }
+                sself.didChangeState?(operation: sself, newState: sself.state)
             }
         }
     }
@@ -48,7 +47,7 @@ class SocialOperation: NSOperation {
     
     let completion: SocialOperationCompletionBlock
     let failure: SocialOperationFailureBlock
-    var didChangeState: SocialOperationDidChangeStateBlock
+    var didChangeState: SocialOperationDidChangeStateBlock?
     
     init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         
@@ -78,7 +77,8 @@ class SocialOperation: NSOperation {
         self.state = newState
         
         social_performInMainThreadSync {[weak self] () -> Void in
-            self?.completion?(result: result)
+            guard let sself = self else { return }
+            sself.completion(operation: sself, result: result)
         }
     }
     
@@ -91,7 +91,8 @@ class SocialOperation: NSOperation {
         self.state = newState
         
         social_performInMainThreadSync {[weak self] () -> Void in
-            self?.failure?(error: error, isCancelled: false)
+            guard let sself = self else { return }
+            sself.failure(operation: sself, error: error, isCancelled: false)
         }
     }
     
@@ -103,7 +104,8 @@ class SocialOperation: NSOperation {
         self.state = newState
         
         social_performInMainThreadSync {[weak self] () -> Void in
-            self?.failure?(error: nil, isCancelled: true)
+            guard let sself = self else { return }
+            sself.failure(operation: sself, error: nil, isCancelled: true)
         }
         
         super.cancel()
