@@ -182,7 +182,7 @@
 				E763D0171B920BAE00726250 /* SocialTwitter.swift */,
 				E7F384AA1BFB4BAA0086EB70 /* SocialTwitterActions.swift */,
 			);
-			name = Twitter;
+			path = Twitter;
 			sourceTree = "<group>";
 		};
 		E7684C011B99DCBF00004581 /* VK */ = {
@@ -191,7 +191,7 @@
 				E729BDE31B94E71200022C6D /* SocialVK.swift */,
 				E7684C021B99DE2000004581 /* SocialVKActions.swift */,
 			);
-			name = VK;
+			path = VK;
 			sourceTree = "<group>";
 		};
 		E7D253D21B9837D300B0BD7E /* Abstract */ = {
@@ -229,7 +229,7 @@
 				E763D0151B920BAE00726250 /* SocialFacebook.swift */,
 				E7F384A81BFB4B310086EB70 /* SocialFacebookActions.swift */,
 			);
-			name = Facebook;
+			path = Facebook;
 			sourceTree = "<group>";
 		};
 		F19F2C4D3CE4E46719631959 /* Pods */ = {
