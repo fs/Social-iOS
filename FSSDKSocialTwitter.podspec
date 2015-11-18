@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialTwitter"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.summary      = "Official Social SDK for iOS from Flatstack"
 
   s.homepage     = "http://www.flatstack.com"
@@ -122,6 +122,6 @@ Pod::Spec.new do |s|
   s.dependency "TwitterKit", "<= 1.13.1"
   s.dependency "TwitterCore", "<= 1.13.1"
   s.dependency "twitter-text", "<= 1.13.0"
-  s.dependency "FSSDKSocialCore", "<= 1.0"
+  s.dependency "FSSDKSocialCore", "~> 1.0"
 
 end

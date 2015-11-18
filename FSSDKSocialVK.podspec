@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialVK"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.summary      = "Official Social SDK for iOS from Flatstack"
 
   s.homepage     = "http://www.flatstack.com"
@@ -120,6 +120,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "VK-ios-sdk", "<= 1.3.7"
-  s.dependency "FSSDKSocialCore", "<= 1.0"
+  s.dependency "FSSDKSocialCore", "~> 1.0"
 
 end

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialFacebook"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.summary      = "Official Social SDK for iOS from Flatstack"
 
   s.homepage     = "http://www.flatstack.com"
@@ -72,13 +72,15 @@ Pod::Spec.new do |s|
   #  CocoaPods is smart about how it includes source code. For source files
   #  giving a folder will include any swift, h, m, mm, c & cpp files.
   #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
+  #  Not§ including the public_header_files will make all headers public.
   #
 
   s.source_files  = "Social/Source/Facebook/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
+
+  # s.prefix_header_contents = '#import <FacebookSDK/FacebookSDK.h>', '@import FSSDKSocialCore'
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -120,6 +122,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "Facebook-iOS-SDK", "<= 3.24.1"
-  s.dependency "FSSDKSocialCore", "<= 1.0"
+  s.dependency "FSSDKSocialCore", "~> 1.0"
 
 end

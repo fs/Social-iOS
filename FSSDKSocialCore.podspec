@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialCore"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.summary      = "Official Social SDK for iOS from Flatstack"
 
   s.description  = <<-DESC
@@ -83,6 +83,7 @@ Pod::Spec.new do |s|
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
+  # s.module_name = "FSSDKSocialCore"
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -112,7 +113,6 @@ Pod::Spec.new do |s|
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
 
-
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
@@ -122,6 +122,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
 
 end
