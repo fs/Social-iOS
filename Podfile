@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 pod 'VK-ios-sdk'
 
 #facebook SDK
-pod 'Facebook-iOS-SDK', '~> 3.24.1'
+pod 'Facebook-iOS-SDK'
 
 #twitter SDK
 pod 'TwitterKit'

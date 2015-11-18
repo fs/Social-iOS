@@ -1,8 +1,6 @@
 import UIKit
 
-#if FACE
-    
-#endif
+
 //MARK: - FacebookSocialData and metadata
 public final class FacebookImageLink {
     public var pictureToURL: NSURL
@@ -38,20 +36,6 @@ public final class FacebookSocialData: SocialData {
 //MARK: - FacebookNetwork
 public final class FacebookNetwork: NSObject {
     
-    override public init() {
-        super.init()
-        
-        //init session
-        let state = FBSession.activeSession().state
-        switch state
-        {
-        case .CreatedTokenLoaded, .CreatedOpening:
-            FacebookNetwork.openNewSession(nil)
-            
-        default:
-            break
-        }
-    }
 }
 
 extension FacebookNetwork: SocialNetwork {
@@ -61,7 +45,7 @@ extension FacebookNetwork: SocialNetwork {
     }
     
     public class func isAuthorized() -> Bool {
-        return FBSession.activeSession().isOpen
+        return FBSDKAccessToken.currentAccessToken() != nil
     }
     
     public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
@@ -74,23 +58,15 @@ extension FacebookNetwork: SocialNetwork {
     
     public class func logout() {
         if self.isAuthorized() == true {
-            FBSession.activeSession().closeAndClearTokenInformation()
+            FBSDKLoginManager().logOut()
         }
     }
     
     private class func openNewSession(completion: ((success: Bool, error: NSError?) -> Void)?) {
         
-        let session = FBSession(permissions: ["email", "public_profile", "publish_actions"])
-        FBSession.setActiveSession(session)
-        session.openWithCompletionHandler { (session, status, error) -> Void in
-            switch status
-            {
-            case .Open, .OpenTokenExtended:
-                completion?(success: true, error: nil)
-                
-            default:
-                completion?(success: false, error: error)
-            }
+        let manager = FBSDKLoginManager.init()
+        manager.logInWithPublishPermissions(["publish_actions"]) { (result, error) -> Void in
+            completion?(success: error != nil, error: error)
         }
     }
 }

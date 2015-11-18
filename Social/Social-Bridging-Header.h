@@ -6,7 +6,9 @@
 #import <VK-ios-sdk/VKSdk.h>
 
 //facebook SDK
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 //twitter SDK
 #import <TwitterKit/TwitterKit.h>
