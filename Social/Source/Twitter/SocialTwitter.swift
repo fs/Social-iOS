@@ -1,16 +1,16 @@
 import UIKit
 
 //MARK: - TwitterSocialData and metadata
-final class TwitterSocialData: SocialData {
-    var text: String?
-    var url: NSURL? {
+public final class TwitterSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL? {
         willSet(newValue) {
             if newValue != nil {
                 self.image = nil
             }
         }
     }
-    var image: SocialImage? {
+    public var image: SocialImage? {
         willSet(newValue) {
             if newValue != nil {
                 self.url = nil
@@ -20,9 +20,9 @@ final class TwitterSocialData: SocialData {
 }
 
 //MARK: - TwitterNetwork
-class TwitterNetwork: NSObject {
+public class TwitterNetwork: NSObject {
     
-    override init() {
+    override public init() {
         super.init()
         
         //init session
@@ -33,11 +33,11 @@ class TwitterNetwork: NSObject {
 //MARK: - SocialNetwork
 extension TwitterNetwork: SocialNetwork {
     
-    class func name() -> String {
+    public class func name() -> String {
         return "Twitter"
     }
     
-    class func isAuthorized() -> Bool {
+    public class func isAuthorized() -> Bool {
         let isAuthorized = {() -> AnyObject? in
             return (Twitter.sharedInstance().sessionStore.session() != nil)
         }
@@ -45,7 +45,7 @@ extension TwitterNetwork: SocialNetwork {
         return self.tw_performInMainThread(isAuthorized) as! Bool
     }
     
-    class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
         if (self.isAuthorized()) {
             completion?(success: true, error: nil)
         } else {
@@ -66,7 +66,7 @@ extension TwitterNetwork: SocialNetwork {
         self.tw_performInMainThread(openSession)
     }
     
-    class func logout() {
+    public class func logout() {
         if self.isAuthorized() == true {
             let logout = {() -> AnyObject? in
                 Twitter.sharedInstance().logOut()
@@ -80,9 +80,9 @@ extension TwitterNetwork: SocialNetwork {
 }
 
 //MARK: -
-extension TwitterNetwork {
+public extension TwitterNetwork {
     
-    internal class func getAPIClient() -> TWTRAPIClient? {
+    public class func getAPIClient() -> TWTRAPIClient? {
         
         let getAPIClient = {() -> AnyObject? in
             return TWTRAPIClient.init(userID: Twitter.sharedInstance().sessionStore.session()?.userID)
@@ -106,9 +106,9 @@ extension TwitterNetwork {
 }
 
 //MARK: -
-extension NSError {
+internal extension NSError {
+    
     internal class func tw_getAPIClientError() -> NSError {
-        
         return NSError.init(domain: "com.TwitterNetwork", code: -100, userInfo: [NSLocalizedDescriptionKey : "API client can not initialization"])
     }
 }

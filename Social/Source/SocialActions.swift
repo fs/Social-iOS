@@ -2,17 +2,17 @@ import UIKit
 
 
 //MARK: - SocialData
-protocol SocialData {
+public protocol SocialData {
     var text: String? {get}
 }
 
 //MARK: - SocialImage
-typealias SocialImageRepresentationHandler = (image: UIImage) -> NSData
-final class SocialImage {
-    let image: UIImage
-    let representationHandler: SocialImageRepresentationHandler
+public typealias SocialImageRepresentationHandler = (image: UIImage) -> NSData
+public final class SocialImage {
+    public let image: UIImage
+    public let representationHandler: SocialImageRepresentationHandler
     
-    init (image: UIImage, representationHandler: SocialImageRepresentationHandler) {
+    public init (image: UIImage, representationHandler: SocialImageRepresentationHandler) {
         self.image = image
         self.representationHandler = representationHandler
     }
@@ -20,7 +20,7 @@ final class SocialImage {
 
 
 //MARK: - PostToWallAction
-protocol PostToWallAction: NSObjectProtocol {
+public protocol PostToWallAction: NSObjectProtocol {
     
     func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation
     

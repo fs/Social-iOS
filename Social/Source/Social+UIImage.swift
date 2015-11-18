@@ -9,9 +9,9 @@
 import UIKit
 
 //MARK:- Resize image
-extension UIImage {
+internal extension UIImage {
     
-    func social_resize(size: CGSize) -> UIImage! {        
+    internal func social_resize(size: CGSize) -> UIImage! {
         
         let selfImageRef = self.CGImage
         var selfBitmapInfo = CGImageGetBitmapInfo(selfImageRef)
@@ -50,15 +50,15 @@ extension UIImage {
         return nil
     }
     
-    func social_resizeProportionalRelativelySmallSide(size: CGSize) -> UIImage! {
+    internal func social_resizeProportionalRelativelySmallSide(size: CGSize) -> UIImage! {
         return self.social_resize(self.social_sizeProportionalRelativelySmallSide(size))
     }
     
-    func social_resizeProportionalRelativelyBigSide(size: CGSize) -> UIImage! {
+    internal func social_resizeProportionalRelativelyBigSide(size: CGSize) -> UIImage! {
         return self.social_resize(self.social_sizeProportionalRelativelyBigSide(size))
     }
     
-    func social_sizeProportionalRelativelySmallSide(size: CGSize) -> CGSize {
+    internal func social_sizeProportionalRelativelySmallSide(size: CGSize) -> CGSize {
         var result = CGSizeZero
         if (self.size.width > self.size.height) {
             result = CGSizeMake((self.size.width/self.size.height) * size.height, size.height);
@@ -68,7 +68,7 @@ extension UIImage {
         return result
     }
     
-    func social_sizeProportionalRelativelyBigSide(size: CGSize) -> CGSize {
+    internal func social_sizeProportionalRelativelyBigSide(size: CGSize) -> CGSize {
         var result = CGSizeZero
         if (self.size.width < self.size.height) {
             result = CGSizeMake((self.size.width/self.size.height) * size.height, size.height);
@@ -80,9 +80,9 @@ extension UIImage {
 }
 
 //MARK:- Square image
-extension UIImage {
+internal extension UIImage {
     
-    func social_cropSquare(size: CGSize) -> UIImage! {
+    internal func social_cropSquare(size: CGSize) -> UIImage! {
         
         let resizedImage = self.social_resize(size)
         

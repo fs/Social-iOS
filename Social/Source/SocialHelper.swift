@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: - Helpers
-func social_performInMainThreadSync(action:(() -> Void)) {
+internal func social_performInMainThreadSync(action:(() -> Void)) {
     if NSThread.isMainThread() {
         action()
     } else {

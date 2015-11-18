@@ -1,9 +1,7 @@
 import UIKit
 
-
-
 //MARK: - SocialNetwork protocol
-protocol SocialNetwork : NSObjectProtocol {
+public protocol SocialNetwork : NSObjectProtocol {
     static func name() -> String
     
     static func isAuthorized() -> Bool
@@ -13,14 +11,14 @@ protocol SocialNetwork : NSObjectProtocol {
 
 extension SocialNetwork where Self: Equatable {}
 
-func == (lhs: SocialNetwork, rhs: SocialNetwork) -> Bool {
+public func == (lhs: SocialNetwork, rhs: SocialNetwork) -> Bool {
     return lhs.dynamicType.name() == rhs.dynamicType.name()
 }
 
 
 
 //MARK: - Abstract SocialOperation
-enum SocialOperationState {
+public enum SocialOperationState {
     case Waiting
     case Sending
     case Successed
@@ -28,13 +26,13 @@ enum SocialOperationState {
     case Cancelled
 }
 
-typealias SocialOperationCompletionBlock        = (operation: SocialOperation, result: AnyObject?) -> Void
-typealias SocialOperationDidChangeStateBlock    = (operation: SocialOperation, newState: SocialOperationState) -> Void
-typealias SocialOperationFailureBlock           = (operation: SocialOperation, error: NSError?, isCancelled: Bool) -> Void
+public typealias SocialOperationCompletionBlock        = (operation: SocialOperation, result: AnyObject?) -> Void
+public typealias SocialOperationDidChangeStateBlock    = (operation: SocialOperation, newState: SocialOperationState) -> Void
+public typealias SocialOperationFailureBlock           = (operation: SocialOperation, error: NSError?, isCancelled: Bool) -> Void
 
-class SocialOperation: NSOperation {
+public class SocialOperation: NSOperation {
     
-    private(set) var state : SocialOperationState = .Waiting {
+    private(set) public var state : SocialOperationState = .Waiting {
         didSet {
             social_performInMainThreadSync {[weak self] () -> Void in
                 guard let sself = self else { return }
@@ -42,14 +40,14 @@ class SocialOperation: NSOperation {
             }
         }
     }
-    private(set) var result : AnyObject? = nil
-    private(set) var error : NSError? = nil
+    private(set) internal var result : AnyObject? = nil
+    private(set) internal var error : NSError? = nil
     
-    let completion: SocialOperationCompletionBlock
-    let failure: SocialOperationFailureBlock
-    var didChangeState: SocialOperationDidChangeStateBlock?
+    public let completion: SocialOperationCompletionBlock
+    public let failure: SocialOperationFailureBlock
+    public var didChangeState: SocialOperationDidChangeStateBlock?
     
-    init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    public init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         
         self.completion = completion
         self.failure = failure
@@ -62,14 +60,14 @@ class SocialOperation: NSOperation {
     }
     
     //MARK: - updating current state
-    internal final func setSendingState() {
+    final func setSendingState() {
         let newState = SocialOperationState.Sending
         self.validateNewState(newState)
         
         self.state = newState
     }
     
-    internal final func setSuccessedState(result: AnyObject?) {
+    final func setSuccessedState(result: AnyObject?) {
         let newState = SocialOperationState.Successed
         self.validateNewState(newState)
         
@@ -82,7 +80,7 @@ class SocialOperation: NSOperation {
         }
     }
     
-    internal final func setFailedState(error: NSError?) {
+    final func setFailedState(error: NSError?) {
         
         let newState = SocialOperationState.Failed
         self.validateNewState(newState)
@@ -97,7 +95,7 @@ class SocialOperation: NSOperation {
     }
     
     //MARK: - override
-    override func cancel() {
+    override public func cancel() {
         let newState = SocialOperationState.Cancelled
         self.validateNewState(newState)
         

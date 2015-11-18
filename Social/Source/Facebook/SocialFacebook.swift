@@ -4,28 +4,28 @@ import UIKit
     
 #endif
 //MARK: - FacebookSocialData and metadata
-final class FacebookImageLink {
-    var pictureToURL: NSURL
-    var name: String?
-    var description: String?
+public final class FacebookImageLink {
+    public var pictureToURL: NSURL
+    public var name: String?
+    public var description: String?
     
-    init (pictureToURL: NSURL) {
+    public init (pictureToURL: NSURL) {
         self.pictureToURL = pictureToURL
     }
 }
 
 
-final class FacebookSocialData: SocialData {
-    var text: String?
-    var url: NSURL?
-    var imageLink: FacebookImageLink? {
+public final class FacebookSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL?
+    public var imageLink: FacebookImageLink? {
         willSet(newValue) {
             if newValue != nil {
                 self.image = nil
             }
         }
     }
-    var image: SocialImage? {
+    public var image: SocialImage? {
         willSet(newValue) {
             if newValue != nil {
                 self.imageLink = nil
@@ -36,9 +36,9 @@ final class FacebookSocialData: SocialData {
 
 
 //MARK: - FacebookNetwork
-final class FacebookNetwork: NSObject {
+public final class FacebookNetwork: NSObject {
     
-    override init() {
+    override public init() {
         super.init()
         
         //init session
@@ -56,15 +56,15 @@ final class FacebookNetwork: NSObject {
 
 extension FacebookNetwork: SocialNetwork {
     
-    class func name() -> String {
+    public class func name() -> String {
         return "Facebook"
     }
     
-    class func isAuthorized() -> Bool {
+    public class func isAuthorized() -> Bool {
         return FBSession.activeSession().isOpen
     }
     
-    class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
         if self.isAuthorized() == true {
             completion?(success: true, error: nil)
         } else {
@@ -72,7 +72,7 @@ extension FacebookNetwork: SocialNetwork {
         }
     }
     
-    class func logout() {
+    public class func logout() {
         if self.isAuthorized() == true {
             FBSession.activeSession().closeAndClearTokenInformation()
         }

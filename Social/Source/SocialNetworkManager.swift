@@ -3,13 +3,13 @@ import UIKit
 
 //MARK: - SocialNetworkManager
 private let SharedSocialNetworkManager = SocialNetworkManager()
-class SocialNetworkManager : NSOperationQueue {
+public class SocialNetworkManager : NSOperationQueue {
     
-    class func sharedManager() -> SocialNetworkManager {
+    public class func sharedManager() -> SocialNetworkManager {
         return SharedSocialNetworkManager
     }
     
-    override init() {
+    override public init() {
         super.init()
         self.name = "com.Social.SocialNetworkManager"
         self.maxConcurrentOperationCount = 5

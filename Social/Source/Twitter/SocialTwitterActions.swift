@@ -2,7 +2,7 @@ import UIKit
 
 extension TwitterNetwork: PostToWallAction {
 
-    func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
 
         if let twitterSocialData = socialData as? TwitterSocialData {
             let operation = TwitterPostToWallOperation(socialData: twitterSocialData, completion: completion, failure: failure)
@@ -13,7 +13,7 @@ extension TwitterNetwork: PostToWallAction {
         }
     }
 
-    func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
 
         let twitterSocialData = TwitterSocialData()
         twitterSocialData.text = text
@@ -31,22 +31,24 @@ extension TwitterNetwork: PostToWallAction {
 }
 
 //MARK: -
-final class TwitterPostToWallOperation : SocialOperation {
+public final class TwitterPostToWallOperation : SocialOperation {
 
-    let socialData: TwitterSocialData
+    public let socialData: TwitterSocialData
 
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
-    override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    override internal init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         fatalError("It doesn't work")
     }
 
-    init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    public init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         self.socialData = socialData
         super.init(completion: completion, failure: failure)
     }
 
-    override func main() {
+    override public func main() {
+        
         if TwitterNetwork.isAuthorized() {
+            
             self.setSendingState()
 
             let socialData = self.socialData
@@ -112,14 +114,14 @@ final class TwitterPostToWallOperation : SocialOperation {
         }
     }
 
-    override func cancel() {
+    override public func cancel() {
         print("Twitter SDK don't support canceling operations")
     }
 }
 
-extension TwitterPostToWallOperation {
+public extension TwitterPostToWallOperation {
 
-    class func uploadImage(twitterImage: SocialImage, completion:TWTRNetworkCompletion) {
+    public class func uploadImage(twitterImage: SocialImage, completion:TWTRNetworkCompletion) {
         
         guard let twAPIClient = TwitterNetwork.getAPIClient() else {
             completion(nil, nil, NSError.tw_getAPIClientError())
@@ -149,7 +151,7 @@ extension TwitterPostToWallOperation {
         twAPIClient.sendTwitterRequest(twUploadRequest, completion: completion)
     }
 
-    class func updateStatus(status: String? = "", url: NSURL?, imagesIDs: [String]?, completion:TWTRNetworkCompletion) {
+    public class func updateStatus(status: String? = "", url: NSURL?, imagesIDs: [String]?, completion:TWTRNetworkCompletion) {
         
         guard let twAPIClient = TwitterNetwork.getAPIClient() else {
             completion(nil, nil, NSError.tw_getAPIClientError())

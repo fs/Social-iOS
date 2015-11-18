@@ -2,7 +2,7 @@ import Foundation
 
 extension VKNetwork: PostToWallAction {
     
-    func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
         if let vkSocialData = socialData as? VKSocialData {
             let operation = VKPostToWallOperation(socialData: vkSocialData, completion: completion, failure: failure)
@@ -13,7 +13,7 @@ extension VKNetwork: PostToWallAction {
         }
     }
     
-    func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
         let vkSocialData = VKSocialData()
         vkSocialData.text = text
@@ -29,23 +29,24 @@ extension VKNetwork: PostToWallAction {
 }
 
 //MARK: -
-final class VKPostToWallOperation : SocialOperation {
+public final class VKPostToWallOperation : SocialOperation {
     
-    let socialData: VKSocialData
+    public let socialData: VKSocialData
     
     private weak var request: VKRequest?
     
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
-    override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    override internal init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         fatalError("It doesn't work")
     }
     
-    init(socialData: VKSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    public init(socialData: VKSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         self.socialData = socialData
         super.init(completion: completion, failure: failure)
     }
     
-    override func main() {
+    override public func main() {
+        
         if VKNetwork.isAuthorized() {
             
             self.setSendingState()
@@ -93,15 +94,15 @@ final class VKPostToWallOperation : SocialOperation {
         }
     }
     
-    override func cancel() {
+    override public func cancel() {
         self.request?.cancel()
         super.cancel()
     }
 }
 
-extension VKPostToWallOperation {
+public extension VKPostToWallOperation {
     
-    class func uploadImage(vkImage: VKImage, completion:((photos: [VKPhoto]?, error: NSError?) -> Void)?) -> VKRequest? {
+    class public func uploadImage(vkImage: VKImage, completion:((photos: [VKPhoto]?, error: NSError?) -> Void)?) -> VKRequest? {
 
         let maxSizeImage = CGSizeMake(2560, 2048)
         var image = vkImage.image
@@ -127,7 +128,7 @@ extension VKPostToWallOperation {
         return request
     }
     
-    class func postToWall(message: String?, url: NSURL?, photos: [VKPhoto]?, completion:((result: AnyObject?, error: NSError?) -> Void)?) -> VKRequest? {
+    class public func postToWall(message: String?, url: NSURL?, photos: [VKPhoto]?, completion:((result: AnyObject?, error: NSError?) -> Void)?) -> VKRequest? {
         var attachments: [String] = []
         if let photos = photos {
             for photo in photos {

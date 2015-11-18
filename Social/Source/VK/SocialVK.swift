@@ -1,26 +1,26 @@
 import UIKit
 
 //MARK: - VKSocialData and metadata
-final class VKImage {
-    let image: UIImage
-    let parameters: VKImageParameters
+public final class VKImage {
+    public let image: UIImage
+    public let parameters: VKImageParameters
     
-    init (image: UIImage, parameters: VKImageParameters) {
+    public init (image: UIImage, parameters: VKImageParameters) {
         self.image = image
         self.parameters = parameters
     }
 }
 
-final class VKSocialData: SocialData {
-    var text: String?
-    var url: NSURL? {
+public final class VKSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL? {
         willSet(newValue) {
             if newValue != nil {
                 self.image = nil
             }
         }
     }
-    var image: VKImage? {
+    public var image: VKImage? {
         willSet(newValue) {
             if newValue != nil {
                 self.url = nil
@@ -32,9 +32,9 @@ final class VKSocialData: SocialData {
 //MARK: - VKNetwork
 private let VKPermisions = ["photos", "wall"]
 
-class VKNetwork: NSObject {
+public class VKNetwork: NSObject {
     
-    override init() {
+    override public init() {
         super.init()
         
         //init session
@@ -55,15 +55,15 @@ class VKNetwork: NSObject {
 //MARK:-
 extension VKNetwork: SocialNetwork {
     
-    class func name() -> String {
+    public class func name() -> String {
         return "VK"
     }
     
-    class func isAuthorized() -> Bool {
+    public class func isAuthorized() -> Bool {
         return VKSdk.isLoggedIn()
     }
     
-    class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
         if (self.isAuthorized()) {
             completion?(success: true, error: nil)
         } else {
@@ -71,7 +71,7 @@ extension VKNetwork: SocialNetwork {
         }
     }
     
-    class func logout() {
+    public class func logout() {
         if self.isAuthorized() == true {
             VKSdk.forceLogout()
         }
@@ -97,12 +97,12 @@ extension VKNetwork: SocialNetwork {
 
 //MARK: -
 //Notifications
-let VKNetworkNotificationDidUpdateToken     = "__kVKDidUpdateTokenNotification__"
-let VKNetworkNotificationDeniedAccess       = "__kVKDeniedAccessNotification__"
-let VKNetworkNotificationHasExperiedToken   = "__kVKHasExperiedTokenNotification__"
+private let VKNetworkNotificationDidUpdateToken     = "__kVKDidUpdateTokenNotification__"
+private let VKNetworkNotificationDeniedAccess       = "__kVKDeniedAccessNotification__"
+private let VKNetworkNotificationHasExperiedToken   = "__kVKHasExperiedTokenNotification__"
 
 extension VKNetwork: VKSdkDelegate {
-    func vkSdkAccessAuthorizationFinishedWithResult(result: VKAuthorizationResult!) {
+    public func vkSdkAccessAuthorizationFinishedWithResult(result: VKAuthorizationResult!) {
         if let token = result?.token where result?.user != nil {
             social_performInMainThreadSync({ () -> Void in
                 NSNotificationCenter.defaultCenter().postNotificationName(VKNetworkNotificationDidUpdateToken, object: token)
@@ -114,19 +114,19 @@ extension VKNetwork: VKSdkDelegate {
         }
     }
     
-    func vkSdkAccessTokenUpdated(newToken: VKAccessToken!, oldToken: VKAccessToken!) {
+    public func vkSdkAccessTokenUpdated(newToken: VKAccessToken!, oldToken: VKAccessToken!) {
         social_performInMainThreadSync({ () -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(VKNetworkNotificationDidUpdateToken, object: newToken)
         })
     }
     
-    func vkSdkUserAuthorizationFailed() {
+    public func vkSdkUserAuthorizationFailed() {
         social_performInMainThreadSync({ () -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(VKNetworkNotificationDeniedAccess, object: nil)
         })
     }
     
-    func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
+    public func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
         social_performInMainThreadSync({ () -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName(VKNetworkNotificationHasExperiedToken, object: expiredToken)
         })
@@ -136,11 +136,11 @@ extension VKNetwork: VKSdkDelegate {
 //MARK: -
 extension VKNetwork: VKSdkUIDelegate {
     
-    func vkSdkShouldPresentViewController(controller: UIViewController!) {
+    public func vkSdkShouldPresentViewController(controller: UIViewController!) {
         self.presentOnRootController(controller)
     }
     
-    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
+    public func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
         let captchaController = VKCaptchaViewController.captchaControllerWithError(captchaError)
         self.presentOnRootController(captchaController)
     }

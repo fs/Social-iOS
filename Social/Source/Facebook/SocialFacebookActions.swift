@@ -2,7 +2,7 @@ import UIKit
 
 extension FacebookNetwork: PostToWallAction {
 
-    func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
 
         guard let facebookSocialData = socialData as? FacebookSocialData else {
             fatalError("\(socialData) must be member of FacebookSocialData class")
@@ -13,7 +13,7 @@ extension FacebookNetwork: PostToWallAction {
         return operation
     }
 
-    func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
+    public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
 
         let facebookSocialData = FacebookSocialData()
         facebookSocialData.text = text
@@ -31,23 +31,24 @@ extension FacebookNetwork: PostToWallAction {
 }
 
 //MARK: - FacebookPostToWallOperation
-final class FacebookPostToWallOperation : SocialOperation {
+public final class FacebookPostToWallOperation : SocialOperation {
 
-    let socialData: FacebookSocialData
+    public let socialData: FacebookSocialData
 
     private weak var connection: FBRequestConnection?
 
     @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: FacebookSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
-    override init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    override internal init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         fatalError("It doesn't work")
     }
 
-    init(socialData: FacebookSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
+    public init(socialData: FacebookSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         self.socialData = socialData
         super.init(completion: completion, failure: failure)
     }
 
-    override func main() {
+    override public func main() {
+        
         if FacebookNetwork.isAuthorized() {
 
             self.setSendingState()
@@ -128,7 +129,7 @@ final class FacebookPostToWallOperation : SocialOperation {
         }
     }
 
-    override func cancel() {
+    override public func cancel() {
         self.connection?.cancel()
         super.cancel()
     }
