@@ -99,11 +99,16 @@
 3. Из вкладки ```Application Settings``` копируем ```Consumer Key (API Key)``` и ```Consumer Secret (API Secret)``` и вставляем следуйщий код для инициализации приложения:
 
     ```
+        import Fabric
+    
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool     {
         // Override point for customization after application launch.
         
-         //setting Twitter
-         Twitter.sharedInstance().startWithConsumerKey("YourConsumerKey(ApiKey))", consumerSecret: "YourConsumerSecret(ApiSecret)")
+        //setting Twitter
+        Twitter.sharedInstance().startWithConsumerKey("YourConsumerKey(ApiKey))", consumerSecret: "YourConsumerSecret(ApiSecret)")
+         
+        //setting Fabric
+        Fabric.with([Twitter.self()])
 
         return true
     }
@@ -132,11 +137,6 @@
 ```
 
 [Более детальная информация](https://dev.twitter.com/mopub/ios/ios9)
-
-**Необходимый код:**
-
-		//setting Fabric
-        Fabric.with([Twitter.self()])
         
 **ДОСТУП ПРИЛОЖЕНИЯ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ:**
 
@@ -178,51 +178,20 @@
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool     {
         //setting VK
-        VKSdk.initializeWithDelegate(self, andAppId: "YourAppID")
-        VKSdk.wakeUpSession()
+	VKSdk.initializeWithAppId("YourAppID")
         
         return true
     }
 
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        
         if VKSdk.processOpenURL(url, fromApplication: sourceApplication) == true {
             return true
         }
         
         return false
     }
-
-    //MARK: -
-    extension AppDelegate : VKSdkDelegate {
-        
-        func vkSdkReceivedNewToken(newToken: VKAccessToken!) {
-            NSNotificationCenter.defaultCenter().postNotificationName(kVKDidUpdateTokenNotification, object: newToken)
-        }
-        
-        func vkSdkRenewedToken(newToken: VKAccessToken!) {
-            NSNotificationCenter.defaultCenter().postNotificationName(kVKDidUpdateTokenNotification, object: newToken)
-        }
-        
-        func vkSdkUserDeniedAccess(authorizationError: VKError!) {
-            NSNotificationCenter.defaultCenter().postNotificationName(kVKDeniedAccessNotification, object: authorizationError)
-        }
-        
-        func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
-            NSNotificationCenter.defaultCenter().postNotificationName(kVKHasExperiedTokenNotification, object: expiredToken)
-        }
-        
-        func vkSdkShouldPresentViewController(controller: UIViewController!) {
-            self.window?.rootViewController?.presentViewController(controller, animated: true, completion: nil)
-        }
-        
-        func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
-            let captchaController        = VKCaptchaViewController.captchaControllerWithError(captchaError)
-            self.window?.rootViewController?.presentViewController(captchaController, animated: true, completion: nil)
-        }
-        
-    }
+    
 
 **ДОСТУП ПРИЛОЖЕНИЯ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ:** 
 
