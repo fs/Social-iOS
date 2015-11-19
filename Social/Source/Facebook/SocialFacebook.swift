@@ -66,7 +66,7 @@ extension FacebookNetwork: SocialNetwork {
         
         let manager = FBSDKLoginManager.init()
         manager.logInWithPublishPermissions(["publish_actions"]) { (result, error) -> Void in
-            completion?(success: error != nil, error: error)
+            completion?(success: error == nil, error: error)
         }
     }
 }
