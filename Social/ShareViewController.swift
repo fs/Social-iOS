@@ -212,8 +212,12 @@ class ShareViewController: UIViewController {
         self.tryShowLybraryController(self)
     }
     
+    @IBAction func longTappedInImageView(sender: AnyObject) {
+        self.message.image = nil
+        self.tableView.reloadData()
+    }
+    
     @IBAction func sendMessage(sender: AnyObject) {
-        
         let includedSocialNetworks  = self.includedSocialNetworks()
         
         var countOfSocialNetwork    = includedSocialNetworks.count
@@ -294,7 +298,6 @@ class ShareViewController: UIViewController {
     }
     
     @IBAction func cancelSendingMessage(sender: AnyObject) {
-        
         let includedSocialNetworks  = self.includedSocialNetworks()
         for network in includedSocialNetworks {
             network.socialNetworkState.operationPostToWall?.cancel()
@@ -333,8 +336,7 @@ class ShareViewController: UIViewController {
         return result
     }
     
-    private func sentSocialNetworks() -> [ShareSocialNetwork]
-    {
+    private func sentSocialNetworks() -> [ShareSocialNetwork] {
         var result: [ShareSocialNetwork] = []
         for socialNetwork in self.socialNetworks {
             if socialNetwork.socialNetworkState.operationPostToWall?.state == .Successed {

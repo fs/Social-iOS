@@ -54,6 +54,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="VbS-hM-Dd4" appends="YES" id="Z03-qy-th2"/>
+                                                        <outletCollection property="gestureRecognizers" destination="FuH-3h-hnu" appends="YES" id="oqq-gf-xFE"/>
                                                     </connections>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-h1-N2o">
@@ -380,6 +381,11 @@
                         <action selector="tappedInImageView:" destination="bjK-uW-jPP" id="T1M-xS-s7t"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="FuH-3h-hnu">
+                    <connections>
+                        <action selector="longTappedInImageView:" destination="bjK-uW-jPP" id="WPg-pB-ia1"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="160" y="293"/>
         </scene>
