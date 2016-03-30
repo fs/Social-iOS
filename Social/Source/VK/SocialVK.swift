@@ -13,20 +13,8 @@ public final class VKImage {
 
 public final class VKSocialData: SocialData {
     public var text: String?
-    public var url: NSURL? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.image = nil
-            }
-        }
-    }
-    public var image: VKImage? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.url = nil
-            }
-        }
-    }
+    public var url: NSURL?
+    public var image: VKImage?
 }
 
 //MARK: - VKNetwork
