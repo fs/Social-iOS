@@ -253,7 +253,6 @@
 				E763CFDA1B91FE4700726250 /* Frameworks */,
 				E763CFDB1B91FE4700726250 /* Resources */,
 				32B5C148404CBEF4FB523FCB /* Copy Pods Resources */,
-				E7684C001B99D3DF00004581 /* Fabric */,
 				E73E5CEF1BFB67F50051611C /* WARNING */,
 				FDD0C42E70DB841F9FE127B2 /* Embed Pods Frameworks */,
 			);
@@ -387,20 +386,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\nTAGS=\"WARNING:|TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\nfi";
-		};
-		E7684C001B99D3DF00004581 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 28618307f55d81afd40f1162183c081e8b1a2825 c220d7e94d5bbd3e526ce1bffd5b2514a957214cfe1c0044b0e6c60809d1ef9b";
 		};
 		FDD0C42E70DB841F9FE127B2 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
