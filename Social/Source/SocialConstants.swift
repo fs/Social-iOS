@@ -2,7 +2,7 @@ import UIKit
 
 //MARK: - debug
 internal func SocialDebugPrintln<T>(message: T) {
-    debugPrint("(File: \(#file), Function: \(#function), Line: \(#line)) \n __DEBUG_MESSAGE: \"\(message)\"")
+    debugPrint("(File: \(__FILE__), Function: \(__FUNCTION__), Line: \(__LINE__)) \n __DEBUG_MESSAGE: \"\(message)\"")
 }
 
 //MARK: - Erorr

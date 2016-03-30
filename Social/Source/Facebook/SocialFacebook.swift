@@ -1,5 +1,7 @@
 import UIKit
 
+//import FBSDKCoreKit
+//import FBSDKLoginKit
 
 //MARK: - FacebookSocialData and metadata
 public final class FacebookImageLink {
@@ -36,6 +38,8 @@ public final class FacebookSocialData: SocialData {
 //MARK: - FacebookNetwork
 public final class FacebookNetwork: NSObject {
     
+    public class func setup() {
+    }
 }
 
 extension FacebookNetwork: SocialNetwork {
@@ -48,7 +52,7 @@ extension FacebookNetwork: SocialNetwork {
         return FBSDKAccessToken.currentAccessToken() != nil
     }
     
-    public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    public class func authorization(completion: SocialNetworkSignInCompletionHandler?) {
         if self.isAuthorized() == true {
             completion?(success: true, error: nil)
         } else {
@@ -56,17 +60,18 @@ extension FacebookNetwork: SocialNetwork {
         }
     }
     
-    public class func logout() {
+    public class func logout(completion: SocialNetworkSignOutCompletionHandler?) {
         if self.isAuthorized() == true {
             FBSDKLoginManager().logOut()
         }
+        completion?()
     }
     
-    private class func openNewSession(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    private class func openNewSession(completion: SocialNetworkSignInCompletionHandler?) {
         
         let manager = FBSDKLoginManager.init()
-        manager.logInWithPublishPermissions(["publish_actions"]) { (result, error) -> Void in
-            completion?(success: error == nil, error: error)
+        manager.logInWithPublishPermissions(["publish_actions"], fromViewController: nil) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) -> Void in
+            completion?(success: result.isCancelled == false && error == nil, error: error)
         }
     }
 }

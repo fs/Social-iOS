@@ -1,5 +1,7 @@
 import UIKit
 
+//import FBSDKCoreKit
+
 extension FacebookNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {

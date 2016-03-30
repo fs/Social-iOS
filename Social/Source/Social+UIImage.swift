@@ -1,11 +1,3 @@
-//
-//  Social+UIImage.swift
-//  Social
-//
-//  Created by Vladimir Goncharov on 29.08.15.
-//  Copyright (c) 2015 FlatStack. All rights reserved.
-//
-
 import UIKit
 
 //MARK:- Resize image
@@ -88,7 +80,7 @@ internal extension UIImage {
         
         let originalWidth  = size.width
         let originalHeight = size.height
-
+        
         var edge: CGFloat
         if originalWidth > originalHeight {
             edge = originalHeight

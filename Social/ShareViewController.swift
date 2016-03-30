@@ -230,7 +230,7 @@ class ShareViewController: UIViewController {
             self.sendButton.enabled             = false
             self.sendButton.backgroundColor     = UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
             
-            let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(ShareViewController.cancelSendingMessage(_:)))
+            let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelSendingMessage:")
             self.navigationItem.setRightBarButtonItem(item, animated: true)
             
             self.navigationItem.setHidesBackButton(true, animated: true)
@@ -465,7 +465,7 @@ extension ShareViewController: UITableViewDataSource {
         case SectionsEnum.socialNetworks.rawValue:
             if self.isAuthNetwork(indexPath.row) == true {
                 let socialNetwork = self.socialNetworks[indexPath.row]
-                socialNetwork.dynamicType.logout()
+                socialNetwork.dynamicType.logout(nil)
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
             }
             

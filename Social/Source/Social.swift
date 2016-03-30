@@ -1,12 +1,17 @@
 import UIKit
 
 //MARK: - SocialNetwork protocol
+public typealias SocialNetworkSignInCompletionHandler = ((success: Bool, error: NSError?) -> Void)
+public typealias SocialNetworkSignOutCompletionHandler = (() -> Void)
+
 public protocol SocialNetwork : NSObjectProtocol {
-    static func name() -> String
     
+    static func setup() -> Void
+    
+    static func name() -> String
     static func isAuthorized() -> Bool
-    static func authorization(completion: ((success: Bool, error: NSError?) -> Void)?)
-    static func logout()
+    static func authorization(completion: SocialNetworkSignInCompletionHandler?)
+    static func logout(completion: SocialNetworkSignOutCompletionHandler?)
 }
 
 extension SocialNetwork where Self: Equatable {}

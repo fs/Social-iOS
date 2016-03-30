@@ -1,5 +1,7 @@
 import Foundation
 
+//import VK_ios_sdk
+
 extension VKNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
@@ -55,7 +57,7 @@ public final class VKPostToWallOperation : SocialOperation {
             let semaphore = dispatch_semaphore_create(0)
             
             let postToWallHandler = {[weak self] (photos: [VKPhoto]?) -> Void in
-                    
+                
                 self?.request = VKPostToWallOperation.postToWall(socialData.text, url: socialData.url, photos: photos, completion: {[weak self] (result, error) -> Void in
                     
                     if let sself = self {
@@ -67,7 +69,7 @@ public final class VKPostToWallOperation : SocialOperation {
                         }
                     }
                     dispatch_semaphore_signal(semaphore)
-                })
+                    })
             }
             
             if let image = self.socialData.image {
@@ -82,7 +84,7 @@ public final class VKPostToWallOperation : SocialOperation {
                         }
                         dispatch_semaphore_signal(semaphore)
                     }
-                })
+                    })
             } else {
                 postToWallHandler(nil)
             }
@@ -103,7 +105,7 @@ public final class VKPostToWallOperation : SocialOperation {
 public extension VKPostToWallOperation {
     
     class public func uploadImage(vkImage: VKImage, completion:((photos: [VKPhoto]?, error: NSError?) -> Void)?) -> VKRequest? {
-
+        
         let maxSizeImage = CGSizeMake(2560, 2048)
         var image = vkImage.image
         if image.size.width > maxSizeImage.width || image.size.height > maxSizeImage.height {
@@ -112,7 +114,7 @@ public extension VKPostToWallOperation {
             //rotate image
             image = image.social_resize(image.size)
         }
-
+        
         let request = VKApi.uploadWallPhotoRequest(image, parameters: vkImage.parameters, userId: Int(VKSdk.accessToken().userId)!, groupId: 0)
         
         request.executeWithResultBlock({ (respone: VKResponse!) -> Void in
@@ -120,9 +122,9 @@ public extension VKPostToWallOperation {
             let photos: [VKPhoto] = [(respone.parsedModel as! VKPhotoArray).firstObject() as! VKPhoto]
             completion?(photos: photos, error: nil)
             
-        }, errorBlock: { (error: NSError!) -> Void in
-            
-            completion?(photos: nil, error: error)
+            }, errorBlock: { (error: NSError!) -> Void in
+                
+                completion?(photos: nil, error: error)
         })
         
         return request

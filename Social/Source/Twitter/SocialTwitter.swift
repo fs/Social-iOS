@@ -1,5 +1,7 @@
 import UIKit
 
+//import TwitterKit
+
 //MARK: - TwitterSocialData and metadata
 public final class TwitterSocialData: SocialData {
     public var text: String?
@@ -20,13 +22,28 @@ public final class TwitterSocialData: SocialData {
 }
 
 //MARK: - TwitterNetwork
+private let twUserIDKey = "__twUserIDKey__"
+
 public class TwitterNetwork: NSObject {
     
-    override public init() {
-        super.init()
-        
-        //init session
+    public class func setup() {
         Twitter.sharedInstance()
+    }
+    
+    private class var currentUserID: String? {
+        get {
+            return NSUserDefaults.standardUserDefaults().valueForKey(twUserIDKey) as? String
+        }
+        set(newValue) {
+            NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: twUserIDKey)
+        }
+    }
+    
+    class var currentUserSession: TWTRAuthSession? {
+        if let currentUserID = self.currentUserID {
+            return Twitter.sharedInstance().sessionStore.sessionForUserID(currentUserID)
+        }
+        return nil
     }
 }
 
@@ -39,13 +56,13 @@ extension TwitterNetwork: SocialNetwork {
     
     public class func isAuthorized() -> Bool {
         let isAuthorized = {() -> AnyObject? in
-            return (Twitter.sharedInstance().sessionStore.session() != nil)
+            return self.currentUserSession != nil
         }
-
+        
         return self.tw_performInMainThread(isAuthorized) as! Bool
     }
     
-    public class func authorization(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    public class func authorization(completion: SocialNetworkSignInCompletionHandler?) {
         if (self.isAuthorized()) {
             completion?(success: true, error: nil)
         } else {
@@ -53,10 +70,14 @@ extension TwitterNetwork: SocialNetwork {
         }
     }
     
-    private class func openNewSession(completion: ((success: Bool, error: NSError?) -> Void)?) {
+    private class func openNewSession(completion: SocialNetworkSignInCompletionHandler?) {
         let openSession = {() -> AnyObject? in
             
             Twitter.sharedInstance().logInWithCompletion({ (session, error) -> Void in
+                if let lSession = session {
+                    self.currentUserID = lSession.userID
+                }
+                print(self.currentUserSession)
                 completion?(success: error == nil, error: error)
             })
             
@@ -66,16 +87,29 @@ extension TwitterNetwork: SocialNetwork {
         self.tw_performInMainThread(openSession)
     }
     
-    public class func logout() {
-        if self.isAuthorized() == true {
-            let logout = {() -> AnyObject? in
-                Twitter.sharedInstance().logOut()
-                
-                return nil
+    public class func logout(completion: SocialNetworkSignOutCompletionHandler?) {
+        
+        guard self.isAuthorized() == true else {
+            completion?()
+            return
+        }
+        
+        let logout = {() -> AnyObject? in
+            if let session = self.currentUserSession {
+                Twitter.sharedInstance().sessionStore.logOutUserID(session.userID)
             }
             
-            self.tw_performInMainThread(logout)
+            self.currentUserID = nil
+            
+            //log out is async
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                completion?()
+            })
+            
+            return nil
         }
+        
+        self.tw_performInMainThread(logout)
     }
 }
 
