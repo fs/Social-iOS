@@ -26,8 +26,22 @@ private let twUserIDKey = "__twUserIDKey__"
 
 public class TwitterNetwork: NSObject {
     
-    public class func setup() {
-        Twitter.sharedInstance()
+    public class var shared: TwitterNetwork {
+        struct Static {
+            static var instance: TwitterNetwork?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
+            Twitter.sharedInstance()
+            Static.instance = TwitterNetwork()
+        }
+        
+        return Static.instance!
+    }
+    
+    private override init() {
+        super.init()
     }
     
     private class var currentUserID: String? {
@@ -50,11 +64,11 @@ public class TwitterNetwork: NSObject {
 //MARK: - SocialNetwork
 extension TwitterNetwork: SocialNetwork {
     
-    public class func name() -> String {
+    public class var name: String {
         return "Twitter"
     }
     
-    public class func isAuthorized() -> Bool {
+    public class var isAuthorized: Bool {
         let isAuthorized = {() -> AnyObject? in
             return self.currentUserSession != nil
         }
@@ -63,7 +77,7 @@ extension TwitterNetwork: SocialNetwork {
     }
     
     public class func authorization(completion: SocialNetworkSignInCompletionHandler?) {
-        if (self.isAuthorized()) {
+        if (self.isAuthorized) {
             completion?(success: true, error: nil)
         } else {
             self.openNewSession(completion)
@@ -77,7 +91,6 @@ extension TwitterNetwork: SocialNetwork {
                 if let lSession = session {
                     self.currentUserID = lSession.userID
                 }
-                print(self.currentUserSession)
                 completion?(success: error == nil, error: error)
             })
             
@@ -89,7 +102,7 @@ extension TwitterNetwork: SocialNetwork {
     
     public class func logout(completion: SocialNetworkSignOutCompletionHandler?) {
         
-        guard self.isAuthorized() == true else {
+        guard self.isAuthorized == true else {
             completion?()
             return
         }

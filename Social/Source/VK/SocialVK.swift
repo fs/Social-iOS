@@ -20,25 +20,40 @@ public final class VKSocialData: SocialData {
 }
 
 //MARK: - VKNetwork
-private let VKPermisions = ["photos", "wall", "email"]
-
 private let defaultDelegate = VKNetworkDelegate.init()
 private let uiDefaultDelegate = VKNetworkUIDelegate.init()
 
 public class VKNetwork: NSObject {
     
-    public class func setup() {
-        if VKSdk.instance().uiDelegate == nil {
-            self.setDefaultUIDelegate()
+    public static var permissions:[String] = ["photos", "wall", "email"]
+    
+    public class var shared: VKNetwork {
+        struct Static {
+            static var instance: VKNetwork?
+            static var token: dispatch_once_t = 0
         }
-        VKSdk.instance().registerDelegate(defaultDelegate)
-        VKSdk.wakeUpSession(VKPermisions) { (state, error) -> Void in
-            if let lError = error {
-                debugPrint("\(__FUNCTION__) - is received error \(lError)")
-            } else {
-                debugPrint("\(__FUNCTION__) - is updated state \(state.rawValue)")
+        
+        dispatch_once(&Static.token) {
+            let instance = VKNetwork()
+            if VKSdk.instance().uiDelegate == nil {
+                self.setDefaultUIDelegate()
             }
+            VKSdk.instance().registerDelegate(defaultDelegate)
+            VKSdk.wakeUpSession(VKNetwork.permissions) { (state, error) -> Void in
+                if let lError = error {
+                    debugPrint("\(__FUNCTION__) - is received error \(lError)")
+                } else {
+                    debugPrint("\(__FUNCTION__) - is updated state \(state.rawValue)")
+                }
+            }
+            Static.instance = instance
         }
+        
+        return Static.instance!
+    }
+    
+    private override init() {
+        super.init()
     }
     
     public class func setNewUIDelegate(delegate: VKSdkUIDelegate) -> Void {
@@ -53,16 +68,16 @@ public class VKNetwork: NSObject {
 //MARK:-
 extension VKNetwork: SocialNetwork {
     
-    public class func name() -> String {
+    public class var name: String {
         return "VK"
     }
     
-    public class func isAuthorized() -> Bool {
+    public class var isAuthorized: Bool {
         return VKSdk.isLoggedIn()
     }
     
     public class func authorization(completion: SocialNetworkSignInCompletionHandler?) {
-        if (self.isAuthorized()) {
+        if (self.isAuthorized) {
             completion?(success: true, error: nil)
         } else {
             self.openNewSession(completion)
@@ -70,22 +85,20 @@ extension VKNetwork: SocialNetwork {
     }
     
     public class func logout(completion: SocialNetworkSignOutCompletionHandler?) {
-        if self.isAuthorized() == true {
+        if self.isAuthorized == true {
             VKSdk.forceLogout()
         }
         completion?()
     }
     
     private class func openNewSession(completion: SocialNetworkSignInCompletionHandler?) {
-        VKSdk.authorize(VKPermisions)
+        VKSdk.authorize(VKNetwork.permissions)
         
         defaultDelegate.completion = completion
     }
 }
 
-
 //MARK: -
-
 private class VKNetworkDelegate: NSObject {
     var completion: SocialNetworkSignInCompletionHandler? = nil
 }

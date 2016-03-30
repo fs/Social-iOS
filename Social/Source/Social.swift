@@ -5,11 +5,9 @@ public typealias SocialNetworkSignInCompletionHandler = ((success: Bool, error: 
 public typealias SocialNetworkSignOutCompletionHandler = (() -> Void)
 
 public protocol SocialNetwork : NSObjectProtocol {
+    static var name: String { get }
+    static var isAuthorized: Bool { get }
     
-    static func setup() -> Void
-    
-    static func name() -> String
-    static func isAuthorized() -> Bool
     static func authorization(completion: SocialNetworkSignInCompletionHandler?)
     static func logout(completion: SocialNetworkSignOutCompletionHandler?)
 }
@@ -17,7 +15,7 @@ public protocol SocialNetwork : NSObjectProtocol {
 extension SocialNetwork where Self: Equatable {}
 
 public func == (lhs: SocialNetwork, rhs: SocialNetwork) -> Bool {
-    return lhs.dynamicType.name() == rhs.dynamicType.name()
+    return lhs.dynamicType.name == rhs.dynamicType.name
 }
 
 

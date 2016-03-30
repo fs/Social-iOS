@@ -38,22 +38,36 @@ public final class FacebookSocialData: SocialData {
 //MARK: - FacebookNetwork
 public final class FacebookNetwork: NSObject {
     
-    public class func setup() {
+    public class var shared: FacebookNetwork {
+        struct Static {
+            static var instance: FacebookNetwork?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
+            Static.instance = FacebookNetwork()
+        }
+        
+        return Static.instance!
+    }
+    
+    private override init() {
+        super.init()
     }
 }
 
 extension FacebookNetwork: SocialNetwork {
     
-    public class func name() -> String {
+    public class var name: String {
         return "Facebook"
     }
     
-    public class func isAuthorized() -> Bool {
+    public class var isAuthorized: Bool {
         return FBSDKAccessToken.currentAccessToken() != nil
     }
     
     public class func authorization(completion: SocialNetworkSignInCompletionHandler?) {
-        if self.isAuthorized() == true {
+        if self.isAuthorized == true {
             completion?(success: true, error: nil)
         } else {
             self.openNewSession(completion)
@@ -61,7 +75,7 @@ extension FacebookNetwork: SocialNetwork {
     }
     
     public class func logout(completion: SocialNetworkSignOutCompletionHandler?) {
-        if self.isAuthorized() == true {
+        if self.isAuthorized == true {
             FBSDKLoginManager().logOut()
         }
         completion?()

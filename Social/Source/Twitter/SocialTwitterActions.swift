@@ -9,7 +9,7 @@ extension TwitterNetwork: PostToWallAction {
         
         if let twitterSocialData = socialData as? TwitterSocialData {
             let operation = TwitterPostToWallOperation(socialData: twitterSocialData, completion: completion, failure: failure)
-            SocialNetworkManager.sharedManager().addOperation(operation)
+            SocialNetworkManager.sharedManager.addOperation(operation)
             return operation
         } else {
             fatalError("\(socialData) must be member of TwitterSocialData class")
@@ -50,20 +50,16 @@ public final class TwitterPostToWallOperation : SocialOperation {
     
     override public func main() {
         
-        if TwitterNetwork.isAuthorized() {
+        if TwitterNetwork.isAuthorized {
             
             self.setSendingState()
             
             let socialData = self.socialData
             let semaphore = dispatch_semaphore_create(0)
             
-            print(TwitterNetwork.getAPIClient())
-            
             let updateStatusHandler = {(imagesIDs: [String]?) -> Void in
                 
                 TwitterPostToWallOperation.updateStatus(socialData.text, url: socialData.url, imagesIDs: imagesIDs, completion: {[weak self] (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
-                    
-                    print(error)
                     
                     if let sself = self {
                         let success = (error == nil)
@@ -86,8 +82,6 @@ public final class TwitterPostToWallOperation : SocialOperation {
             
             if let twitterImage = socialData.image {
                 TwitterPostToWallOperation.uploadImage(twitterImage, completion: {[weak self] (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
-                    
-                    print(error)
                     
                     if let sself = self {
                         

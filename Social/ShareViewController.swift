@@ -193,7 +193,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private lazy var socialNetworks: [ShareSocialNetwork] = { return [FacebookNetwork(), TwitterNetwork(), VKNetwork()] }()
+    private lazy var socialNetworks: [ShareSocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
@@ -329,7 +329,7 @@ class ShareViewController: UIViewController {
     private func includedSocialNetworks() -> [ShareSocialNetwork] {
         var result: [ShareSocialNetwork] = []
         for socialNetwork in self.socialNetworks {
-            if socialNetwork.dynamicType.isAuthorized() && socialNetwork.socialNetworkState.isNeedToSend {
+            if socialNetwork.dynamicType.isAuthorized && socialNetwork.socialNetworkState.isNeedToSend {
                 result.append(socialNetwork)
             }
         }
@@ -503,9 +503,9 @@ extension ShareViewController: UITableViewDataSource {
 
         case SectionsEnum.socialNetworks.rawValue:
             let socialNetwork = self.socialNetworks[indexPath.row]
-            if socialNetwork.dynamicType.isAuthorized() == false {
+            if socialNetwork.dynamicType.isAuthorized == false {
                 let cell = tableView.dequeueReusableCellWithIdentifier("SocialNetworkConnectingCell") as! SocialNetworkConnectingCell
-                cell.socialNetworkLabel.text        = socialNetwork.dynamicType.name()
+                cell.socialNetworkLabel.text        = socialNetwork.dynamicType.name
                 cell.didTouchConnectHandler         = { () -> Void in
                     
                     socialNetwork.dynamicType.authorization({[weak self] (success, error) -> Void in
@@ -518,7 +518,7 @@ extension ShareViewController: UITableViewDataSource {
                 }
                 return cell
             } else {
-                let name = socialNetwork.dynamicType.name()
+                let name = socialNetwork.dynamicType.name
                 if let state = socialNetwork.socialNetworkState.operationPostToWall?.state where state != .Waiting {
                     
                     switch state {
@@ -599,7 +599,7 @@ extension ShareViewController: UITableViewDataSource {
     //MARK: - private
     private func isAuthNetwork(index: Int) -> Bool {
         let socialNetwork = self.socialNetworks[index]
-        return socialNetwork.dynamicType.isAuthorized()
+        return socialNetwork.dynamicType.isAuthorized
     }
     
     private func isExistPromtCell() -> Bool {

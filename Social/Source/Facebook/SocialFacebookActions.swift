@@ -11,7 +11,7 @@ extension FacebookNetwork: PostToWallAction {
         }
         
         let operation = FacebookPostToWallOperation.init(socialData: facebookSocialData, completion: completion, failure: failure)
-        SocialNetworkManager.sharedManager().addOperation(operation)
+        SocialNetworkManager.sharedManager.addOperation(operation)
         return operation
     }
     
@@ -51,7 +51,7 @@ public final class FacebookPostToWallOperation : SocialOperation {
     
     override public func main() {
         
-        if FacebookNetwork.isAuthorized() {
+        if FacebookNetwork.isAuthorized {
             
             self.setSendingState()
             

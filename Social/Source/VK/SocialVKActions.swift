@@ -8,7 +8,7 @@ extension VKNetwork: PostToWallAction {
         
         if let vkSocialData = socialData as? VKSocialData {
             let operation = VKPostToWallOperation(socialData: vkSocialData, completion: completion, failure: failure)
-            SocialNetworkManager.sharedManager().addOperation(operation)
+            SocialNetworkManager.sharedManager.addOperation(operation)
             return operation
         } else {
             fatalError("\(socialData) must be member of VKSocialData class")
@@ -49,7 +49,7 @@ public final class VKPostToWallOperation : SocialOperation {
     
     override public func main() {
         
-        if VKNetwork.isAuthorized() {
+        if VKNetwork.isAuthorized {
             
             self.setSendingState()
             
@@ -69,7 +69,7 @@ public final class VKPostToWallOperation : SocialOperation {
                         }
                     }
                     dispatch_semaphore_signal(semaphore)
-                    })
+                })
             }
             
             if let image = self.socialData.image {
