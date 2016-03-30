@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+//import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        Twitter.sharedInstance().startWithConsumerKey("x0Ao3SWSmX6Xm7Mjqg3Q8Ykgg", consumerSecret: "x62gj7RL45ZkmUI8lTLYRGDWDlaLCbNBQuKCYqbznX0aSKqcyt")
+        Twitter.sharedInstance().startWithConsumerKey("Z6wHgmgcU1xZwrQp88Hu26lCu", consumerSecret: "tjVMKUHfIvtwWL5fBJirDCp3J6CoG3nGxftdupaijIznjJ256C")
         
         //setting Fabric
         Fabric.with([Crashlytics.self(), Twitter.self()])
