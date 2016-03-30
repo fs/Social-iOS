@@ -1,7 +1,5 @@
 import UIKit
 
-//import VK_ios_sdk
-
 //MARK: - VKSocialData and metadata
 public final class VKImage {
     public let image: UIImage

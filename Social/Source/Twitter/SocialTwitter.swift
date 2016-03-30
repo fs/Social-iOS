@@ -1,7 +1,5 @@
 import UIKit
 
-//import TwitterKit
-
 //MARK: - TwitterSocialData and metadata
 public final class TwitterSocialData: SocialData {
     public var text: String?

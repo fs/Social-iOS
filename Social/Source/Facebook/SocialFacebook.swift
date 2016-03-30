@@ -1,8 +1,5 @@
 import UIKit
 
-//import FBSDKCoreKit
-//import FBSDKLoginKit
-
 //MARK: - FacebookSocialData and metadata
 public final class FacebookImageLink {
     public var pictureToURL: NSURL

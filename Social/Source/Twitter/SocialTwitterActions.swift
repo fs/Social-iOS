@@ -1,8 +1,5 @@
 import UIKit
 
-//import TwitterKit
-//import twitter_text
-
 extension TwitterNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {

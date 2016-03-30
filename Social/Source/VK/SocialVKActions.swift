@@ -1,7 +1,5 @@
 import Foundation
 
-//import VK_ios_sdk
-
 extension VKNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
