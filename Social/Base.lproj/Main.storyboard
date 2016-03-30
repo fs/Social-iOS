@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wgX-so-d7X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wgX-so-d7X">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -57,7 +57,7 @@
                                                     </connections>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5B-h1-N2o">
-                                                    <rect key="frame" x="135" y="15" width="440" height="100"/>
+                                                    <rect key="frame" x="135" y="15" width="440" height="69"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -66,20 +66,29 @@
                                                         <outlet property="delegate" destination="zmj-oD-gbI" id="Ke3-1D-Bu3"/>
                                                     </connections>
                                                 </textView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-jx-ou1">
+                                                    <rect key="frame" x="135" y="92" width="440" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="p5B-h1-N2o" secondAttribute="bottom" constant="15" id="2OV-UL-PLj"/>
                                                 <constraint firstAttribute="bottom" secondItem="pQV-mg-A0r" secondAttribute="bottom" constant="15" id="9Mi-at-UKI"/>
                                                 <constraint firstItem="p5B-h1-N2o" firstAttribute="top" secondItem="WOm-5h-sfi" secondAttribute="top" constant="15" id="Jjc-Qo-hxw"/>
                                                 <constraint firstItem="pQV-mg-A0r" firstAttribute="top" secondItem="WOm-5h-sfi" secondAttribute="top" constant="15" id="NCO-k2-6z1"/>
                                                 <constraint firstAttribute="trailing" secondItem="p5B-h1-N2o" secondAttribute="trailing" constant="25" id="Ri4-Rd-4aJ"/>
                                                 <constraint firstItem="p5B-h1-N2o" firstAttribute="leading" secondItem="pQV-mg-A0r" secondAttribute="trailing" constant="20" id="SQh-FG-Ewt"/>
+                                                <constraint firstItem="cqY-jx-ou1" firstAttribute="trailing" secondItem="p5B-h1-N2o" secondAttribute="trailing" id="Shi-wl-5Ul"/>
                                                 <constraint firstItem="pQV-mg-A0r" firstAttribute="leading" secondItem="WOm-5h-sfi" secondAttribute="leading" constant="15" id="Y89-Jz-J5n"/>
+                                                <constraint firstItem="cqY-jx-ou1" firstAttribute="leading" secondItem="p5B-h1-N2o" secondAttribute="leading" id="geH-NC-Ih8"/>
+                                                <constraint firstItem="cqY-jx-ou1" firstAttribute="top" secondItem="p5B-h1-N2o" secondAttribute="bottom" constant="8" id="wJA-3A-X3W"/>
+                                                <constraint firstAttribute="bottom" secondItem="cqY-jx-ou1" secondAttribute="bottom" constant="8" id="x3Z-Kn-rOc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageTextField" destination="p5B-h1-N2o" id="GBM-vp-q01"/>
                                             <outlet property="photoView" destination="pQV-mg-A0r" id="Jcq-AD-W7J"/>
+                                            <outlet property="urlField" destination="cqY-jx-ou1" id="A80-ge-JQ4"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SocialNetworkConnectingCell" id="yUg-fl-wVw" customClass="SocialNetworkConnectingCell" customModule="Social" customModuleProvider="target">

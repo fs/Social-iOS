@@ -7,14 +7,19 @@ internal class DataCell: UITableViewCell {
     
     @IBOutlet weak var photoView:UIImageView!
     @IBOutlet weak var messageTextField: UITextView!
+    @IBOutlet weak var urlField: UITextField!
     
     var didChangeTextHandler:((textView: UITextView, string: String) -> Void)?
+    var didChangeURLHandler:((textField: UITextField, string: String) -> Void)?
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.photoView?.image = nil
         self.messageTextField?.text = nil
+        self.urlField?.text = nil
+        
         self.didChangeTextHandler   = nil
+        self.didChangeURLHandler    = nil
     }
 }
 
@@ -25,11 +30,26 @@ extension DataCell: UITextViewDelegate {
         newtext                 = newtext.stringByReplacingCharactersInRange(range, withString: text)
         
         if text == "\n" {
-            
             textView.resignFirstResponder()
         }
         
         self.didChangeTextHandler?(textView: textView, string: newtext as String)
+        
+        return true
+    }
+}
+
+extension DataCell: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        var newtext:NSString    = (textField.text ?? "") as NSString
+        newtext                 = newtext.stringByReplacingCharactersInRange(range, withString: string)
+        
+        if textField == "\n" {
+            textField.resignFirstResponder()
+        }
+        
+        self.didChangeURLHandler?(textField: textField, string: newtext as String)
         
         return true
     }
@@ -148,7 +168,7 @@ extension SocialNetwork {
 internal final class Message {
     var text: String = "Some text"
     var image: UIImage?
-    var url: NSURL = NSURL(string: "http://www.adme.ru/narodnoe-tvorchestvo/kogda-koryavye-nadpisi-na-stenah-smotryat-pryamo-v-dushu-886410/?vksrc=vksrc886410")!
+    var url: String? = "http://www.adme.ru/narodnoe-tvorchestvo/kogda-koryavye-nadpisi-na-stenah-smotryat-pryamo-v-dushu-886410/?vksrc=vksrc886410"
 }
 
 
@@ -248,7 +268,12 @@ class ShareViewController: UIViewController {
                     }
                 }
                 
-                let operation = network.postDataToWall(self.message.text, image: self.message.image, url: self.message.url, completion: { (result) -> Void in
+                var url: NSURL? = nil
+                if let messageURL = self.message.url {
+                    url = NSURL(string: messageURL)
+                }
+                
+                let operation = network.postDataToWall(self.message.text, image: self.message.image, url: url, completion: { (result) -> Void in
                     updateUI(true)
                     }, failure: { (operation, error, isCancelled) -> Void in
                         print(error)
@@ -454,6 +479,7 @@ extension ShareViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("DataCell") as! DataCell
             cell.photoView.image       = self.message.image
             cell.messageTextField.text = self.message.text
+            cell.urlField.text         = self.message.url
             cell.didChangeTextHandler  = {[weak self](textView: UITextView, string: String) -> Void in
                 
                 if let sself = self {
@@ -463,6 +489,12 @@ extension ShareViewController: UITableViewDataSource {
                     if let view = sself.tableView.headerViewForSection(messageSection) as? RNLeftAndRightHeaderFooterView {
                         sself.updateHeaderFooterViewInSection(view, section:messageSection)
                     }
+                }
+            }
+            cell.didChangeURLHandler = {[weak self](textField: UITextField, string: String) -> Void in
+                
+                if let sself = self {
+                    sself.message.url   = string
                 }
             }
             return cell
