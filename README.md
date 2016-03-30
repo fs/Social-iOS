@@ -37,7 +37,7 @@
 
     ```
     #facebook SDK 
-    pod 'Facebook-iOS-SDK', '~> 3.23.0'
+    pod 'Facebook-iOS-SDK'
     ```
     
  2. [Создать новое приложение на Facebook](https://developers.facebook.com/apps/)
