@@ -175,8 +175,6 @@ internal final class Message {
 
 //MARK :- ShareViewController
 
-typealias ShareSocialNetwork = protocol<SocialNetwork, PostToWallAction>
-
 class ShareViewController: UIViewController {
     
     enum SectionsEnum: Int {
@@ -193,7 +191,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private lazy var socialNetworks: [ShareSocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared] }()
+    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
@@ -277,16 +275,20 @@ class ShareViewController: UIViewController {
                     url = NSURL(string: messageURL)
                 }
                 
-                let operation = network.postDataToWall(self.message.text, image: self.message.image, url: url, completion: { (result) -> Void in
-                    updateUI(true)
-                    }, failure: { (operation, error, isCancelled) -> Void in
-                        print(error)
+                if let networkAsPostToWallAction = network as? PostToWallAction {
+                    let operation = networkAsPostToWallAction.postDataToWall(self.message.text, image: self.message.image, url: url, completion: { (result) -> Void in
                         updateUI(true)
-                })
-                operation.didChangeState = {(newState) -> Void in
-                    updateUI(false)
+                        }, failure: { (operation, error, isCancelled) -> Void in
+                            print(error)
+                            updateUI(true)
+                    })
+                    operation.didChangeState = {(newState) -> Void in
+                        updateUI(false)
+                    }
+                    network.socialNetworkState.operationPostToWall = operation
+                } else {
+                    print("\(network) doesn't support PostToWallAction protocol")
                 }
-                network.socialNetworkState.operationPostToWall = operation
             }
             
             self.tableView.reloadSections(NSIndexSet(index: socialsSection), withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -326,8 +328,8 @@ class ShareViewController: UIViewController {
     }
     
     //MARK: - social helper
-    private func includedSocialNetworks() -> [ShareSocialNetwork] {
-        var result: [ShareSocialNetwork] = []
+    private func includedSocialNetworks() -> [SocialNetwork] {
+        var result: [SocialNetwork] = []
         for socialNetwork in self.socialNetworks {
             if socialNetwork.dynamicType.isAuthorized && socialNetwork.socialNetworkState.isNeedToSend {
                 result.append(socialNetwork)
@@ -336,8 +338,8 @@ class ShareViewController: UIViewController {
         return result
     }
     
-    private func sentSocialNetworks() -> [ShareSocialNetwork] {
-        var result: [ShareSocialNetwork] = []
+    private func sentSocialNetworks() -> [SocialNetwork] {
+        var result: [SocialNetwork] = []
         for socialNetwork in self.socialNetworks {
             if socialNetwork.socialNetworkState.operationPostToWall?.state == .Successed {
                 result.append(socialNetwork)
@@ -508,7 +510,7 @@ extension ShareViewController: UITableViewDataSource {
                 cell.socialNetworkLabel.text        = socialNetwork.dynamicType.name
                 cell.didTouchConnectHandler         = { () -> Void in
                     
-                    socialNetwork.dynamicType.authorization({[weak self] (success, error) -> Void in
+                    socialNetwork.dynamicType.authorization({[weak self] (success, error) in
                         if let sself = self where success == true {
                             if let indexPath = sself.tableView.indexPathForCell(cell) {
                                 sself.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
