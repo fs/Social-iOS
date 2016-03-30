@@ -76,7 +76,7 @@
 2. Заходим на https://apps.twitter.com и нажимаем ```Create New App```. Вводим ```Name```, ```Description```, ```Website``` и ```Callback URL``` обязательно. Если не знаете, что можно добавить для ```Website``` и ```Callback URL```, то просто вставьте http://www.placeholder.com. Теперь создаем приложение.
 2. В вкладке ```Permissions``` проверяем, чтобы ```Access``` был ```Read and Write```
 3. Из вкладки ```Application Settings``` копируем ```Consumer Key (API Key)``` и ```Consumer Secret (API Secret)```
-4. Настраиваем приложение, как описано в [документации](https://docs.fabric.io/ios/twitter/twitterkit-setup.html) и [iOS9]((https://dev.twitter.com/mopub/ios/ios9))
+4. Настраиваем приложение, как описано в [документации](https://docs.fabric.io/ios/twitter/twitterkit-setup.html) и [iOS9](https://dev.twitter.com/mopub/ios/ios9)
         
 **ДОСТУП ПРИЛОЖЕНИЯ ДЛЯ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ:**
 
