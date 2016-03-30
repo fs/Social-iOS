@@ -32,9 +32,9 @@ public class VKNetwork: NSObject {
         VKSdk.instance().registerDelegate(self)
         VKSdk.wakeUpSession(VKPermisions) { (state, error) -> Void in
             if let lError = error {
-                debugPrint("\(__FUNCTION__) - is received error \(lError)")
+                debugPrint("\(#function) - is received error \(lError)")
             } else {
-                debugPrint("\(__FUNCTION__) - is updated state \(state.rawValue)")
+                debugPrint("\(#function) - is updated state \(state.rawValue)")
             }
         }
     }

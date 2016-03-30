@@ -206,13 +206,13 @@ class ShareViewController: UIViewController {
             self.sendButton.enabled             = false
             self.sendButton.backgroundColor     = UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
             
-            let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelSendingMessage:")
+            let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(ShareViewController.cancelSendingMessage(_:)))
             self.navigationItem.setRightBarButtonItem(item, animated: true)
             
             self.navigationItem.setHidesBackButton(true, animated: true)
             let completionHandler       = {[weak self]() -> Void in
                 
-                countOfSocialNetwork--
+                countOfSocialNetwork -= 1
                 if countOfSocialNetwork == 0 {
                     if let sself = self {
                         sself.sendButton.enabled    = true
@@ -226,7 +226,7 @@ class ShareViewController: UIViewController {
                 }
             }
             
-            for (var i: Int = 0; i < includedSocialNetworks.count; i++) {
+            for i in 0.stride(to: includedSocialNetworks.count, by: 1) {
                 let network = includedSocialNetworks[i]
                 
                 let updateUI = {[weak self] (isFinished: Bool) -> Void in
