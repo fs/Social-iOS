@@ -1,7 +1,5 @@
 import UIKit
 
-
-//MARK: - SocialNetworkManager
 public class SocialNetworkManager : NSOperationQueue {
     
     public class var sharedManager: SocialNetworkManager {

@@ -1,6 +1,5 @@
 import UIKit
 
-
 //MARK: - SocialData
 public protocol SocialData {
     var text: String? {get}

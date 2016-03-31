@@ -1,16 +1,9 @@
-//
-//  SocialGoogle.swift
-//  Adme
-//
-//  Created by Kruperfone on 23.11.15.
-//  Copyright © 2015 Flatstack. All rights reserved.
-//
-
 import Foundation
 
 private let defaultDelegate = GoogleSignInDelegate()
 private let uiDefaultDelegate = GoogleSignInUIDelegate()
 
+//MARK: -
 public class GoogleNetwork: NSObject {
     
     public class var shared: GoogleNetwork {
@@ -53,7 +46,7 @@ public class GoogleNetwork: NSObject {
     }
 }
 
-//MARK: - SocialNetwork
+//MARK: - 
 extension GoogleNetwork: SocialNetwork {
     
     public static var name: String {

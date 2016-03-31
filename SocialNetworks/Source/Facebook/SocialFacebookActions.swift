@@ -1,5 +1,37 @@
 import UIKit
 
+//MARK: - FacebookSocialData and metadata
+public final class FacebookImageLink {
+    public var pictureToURL: NSURL
+    public var name: String?
+    public var description: String?
+    
+    public init (pictureToURL: NSURL) {
+        self.pictureToURL = pictureToURL
+    }
+}
+
+
+public final class FacebookSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL?
+    public var imageLink: FacebookImageLink? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.image = nil
+            }
+        }
+    }
+    public var image: SocialImage? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.imageLink = nil
+            }
+        }
+    }
+}
+
+//MARK: -
 extension FacebookNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
@@ -30,7 +62,7 @@ extension FacebookNetwork: PostToWallAction {
     }
 }
 
-//MARK: - FacebookPostToWallOperation
+//MARK: - 
 public final class FacebookPostToWallOperation : SocialOperation {
     
     public let socialData: FacebookSocialData

@@ -1,5 +1,23 @@
 import Foundation
 
+//MARK: - VKSocialData and metadata
+public final class VKImage {
+    public let image: UIImage
+    public let parameters: VKImageParameters
+    
+    public init (image: UIImage, parameters: VKImageParameters) {
+        self.image = image
+        self.parameters = parameters
+    }
+}
+
+public final class VKSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL?
+    public var image: VKImage?
+}
+
+//MARK: -
 extension VKNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {

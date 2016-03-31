@@ -1,6 +1,6 @@
 import UIKit
 
-//MARK: - debug
+//MARK: - Debuging
 internal func SocialDebugPrintln<T>(message: T) {
     #if swift(>=2.2)
         debugPrint("(File: \(#file), Function: \(#function), Line: \(#line)) \n __DEBUG_MESSAGE: \"\(message)\"")
@@ -9,8 +9,7 @@ internal func SocialDebugPrintln<T>(message: T) {
     #endif
 }
 
-//MARK: - Erorr
-
+//MARK: - Errors
 public let kSocialOperationNotAuthorizedErrorKey = 401
 
 internal extension NSError {
