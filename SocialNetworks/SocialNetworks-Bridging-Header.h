@@ -17,3 +17,6 @@
 
 //google SDK
 #import <Google/SignIn.h>
+
+//pinterest SDK
+#import <PinterestSDK/PinterestSDK.h>
