@@ -35,6 +35,8 @@ public final class FacebookSocialData: SocialData {
 //MARK: - FacebookNetwork
 public final class FacebookNetwork: NSObject {
     
+    public static var permissions: [String] = ["publish_actions"]
+    
     public class var shared: FacebookNetwork {
         struct Static {
             static var instance: FacebookNetwork?
@@ -81,7 +83,7 @@ extension FacebookNetwork: SocialNetwork {
     private class func openNewSession(completion: SocialNetworkSignInCompletionHandler?) {
         
         let manager = FBSDKLoginManager.init()
-        manager.logInWithPublishPermissions(["publish_actions"], fromViewController: nil) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) -> Void in
+        manager.logInWithPublishPermissions(FacebookNetwork.permissions, fromViewController: nil) { (result: FBSDKLoginManagerLoginResult!, error: NSError!) -> Void in
             completion?(success: result.isCancelled == false && error == nil, error: error)
         }
     }
