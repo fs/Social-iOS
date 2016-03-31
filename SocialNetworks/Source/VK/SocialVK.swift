@@ -39,9 +39,18 @@ public class VKNetwork: NSObject {
             VKSdk.instance().registerDelegate(defaultDelegate)
             VKSdk.wakeUpSession(VKNetwork.permissions) { (state, error) -> Void in
                 if let lError = error {
-                    debugPrint("\(__FUNCTION__) - is received error \(lError)")
+                    #if swift(>=2.2)
+                        debugPrint("\(#function) - is received error \(lError)")
+                    #else
+                        debugPrint("\(__FUNCTION__) - is received error \(lError)")
+                    #endif
+                    
                 } else {
-                    debugPrint("\(__FUNCTION__) - is updated state \(state.rawValue)")
+                    #if swift(>=2.2)
+                        debugPrint("\(#function) - is updated state \(state.rawValue)")
+                    #else
+                        debugPrint("\(__FUNCTION__) - is updated state \(state.rawValue)")
+                    #endif
                 }
             }
             Static.instance = instance

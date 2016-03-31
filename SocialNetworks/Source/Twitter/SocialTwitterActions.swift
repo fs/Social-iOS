@@ -74,7 +74,7 @@ public final class TwitterPostToWallOperation : SocialOperation {
                     }
                     
                     dispatch_semaphore_signal(semaphore)
-                    })
+                })
             }
             
             if let twitterImage = socialData.image {
@@ -103,7 +103,9 @@ public final class TwitterPostToWallOperation : SocialOperation {
                             dispatch_semaphore_signal(semaphore)
                         }
                     }
-                    })
+                    
+                    dispatch_semaphore_signal(semaphore)
+                })
             } else {
                 updateStatusHandler(nil)
             }

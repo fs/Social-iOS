@@ -82,7 +82,7 @@ public final class VKPostToWallOperation : SocialOperation {
                         }
                         dispatch_semaphore_signal(semaphore)
                     }
-                    })
+                })
             } else {
                 postToWallHandler(nil)
             }

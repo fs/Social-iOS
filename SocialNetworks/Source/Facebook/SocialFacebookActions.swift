@@ -106,22 +106,25 @@ public final class FacebookPostToWallOperation : SocialOperation {
             
             dispatch_sync(dispatch_get_main_queue(), {[weak self] () -> Void in
                 
-                guard let sself = self else { return }
-                
-                let request = FBSDKGraphRequest.init(graphPath: graphPath, parameters: params, HTTPMethod: "POST")
-                sself.connection = request.startWithCompletionHandler({[weak self] (requestConnection, result, error) -> Void in
-                    
-                    guard let sself = self else { return }
-                    let success = (error == nil)
-                    if success {
-                        sself.setSuccessedState(result)
-                    } else if sself.state != .Cancelled {
-                        sself.setFailedState(error)
-                    }
-                    
-                    dispatch_semaphore_signal(semaphore)
+                if let sself = self {
+                    let request = FBSDKGraphRequest.init(graphPath: graphPath, parameters: params, HTTPMethod: "POST")
+                    sself.connection = request.startWithCompletionHandler({[weak self] (requestConnection, result, error) -> Void in
+                        
+                        if let sself = self {
+                            let success = (error == nil)
+                            if success {
+                                sself.setSuccessedState(result)
+                            } else if sself.state != .Cancelled {
+                                sself.setFailedState(error)
+                            }
+                        }
+                        
+                        dispatch_semaphore_signal(semaphore)
                     })
-                })
+                } else {
+                    dispatch_semaphore_signal(semaphore)
+                }
+            })
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         } else {

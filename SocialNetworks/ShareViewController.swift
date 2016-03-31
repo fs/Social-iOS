@@ -228,7 +228,12 @@ class ShareViewController: UIViewController {
             self.sendButton.enabled             = false
             self.sendButton.backgroundColor     = UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
             
+            #if swift(>=2.2)
+            let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(ShareViewController.cancelSendingMessage(_:)))
+            #else
             let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelSendingMessage:")
+            #endif
+            
             self.navigationItem.setRightBarButtonItem(item, animated: true)
             
             self.navigationItem.setHidesBackButton(true, animated: true)
