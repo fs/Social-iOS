@@ -191,7 +191,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared] }()
+    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared, GoogleNetwork.shared] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
@@ -293,6 +293,7 @@ class ShareViewController: UIViewController {
                     network.socialNetworkState.operationPostToWall = operation
                 } else {
                     print("\(network) doesn't support PostToWallAction protocol")
+                    updateUI(true)
                 }
             }
             

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		86A637829D840521E4121BD2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A9C064E3187078B8AA744D /* libPods.a */; };
+		E73D86B21CAD2377003022AA /* SocialGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73D86B11CAD2377003022AA /* SocialGoogle.swift */; };
+		E73D86B61CAD2A7B003022AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E73D86B51CAD2A7B003022AA /* GoogleService-Info.plist */; };
 		E79B92871CAD07B20006F282 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B92861CAD07B20006F282 /* AppDelegate.swift */; };
 		E79B928E1CAD07B20006F282 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E79B928C1CAD07B20006F282 /* Main.storyboard */; };
 		E79B92901CAD07B20006F282 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E79B928F1CAD07B20006F282 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 		40372F5E3EDB2F7B33CB3676 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		568B4A5902D4CD471085B266 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E5A9C064E3187078B8AA744D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E73D86B11CAD2377003022AA /* SocialGoogle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialGoogle.swift; sourceTree = "<group>"; };
+		E73D86B51CAD2A7B003022AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E79B92831CAD07B20006F282 /* SocialNetworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialNetworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E79B92861CAD07B20006F282 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E79B928D1CAD07B20006F282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +88,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E73D86B01CAD2377003022AA /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				E73D86B11CAD2377003022AA /* SocialGoogle.swift */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
 		E79B927A1CAD07B20006F282 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +130,7 @@
 		E79B929E1CAD13FD0006F282 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E73D86B51CAD2A7B003022AA /* GoogleService-Info.plist */,
 				E79B92941CAD07B20006F282 /* Info.plist */,
 				E79B929A1CAD0D0B0006F282 /* SocialNetworks-Bridging-Header.h */,
 			);
@@ -135,6 +148,7 @@
 				E7BC0F341CAD17F400944C48 /* SocialNetworkManager.swift */,
 				E7BC0F2C1CAD17F400944C48 /* Facebook */,
 				E7BC0F351CAD17F400944C48 /* Twitter */,
+				E73D86B01CAD2377003022AA /* Google */,
 				E7BC0F381CAD17F400944C48 /* VK */,
 			);
 			path = Source;
@@ -170,9 +184,9 @@
 		E7BC0F4A1CAD17F700944C48 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7BC0F2A1CAD17F400944C48 /* ShareViewController.swift */,
 				E7BC0F281CAD17F400944C48 /* RNLeftAndRightHeaderFooterView.swift */,
 				E7BC0F291CAD17F400944C48 /* RNLeftAndRightHeaderFooterView.xib */,
-				E7BC0F2A1CAD17F400944C48 /* ShareViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -239,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7BC0F3C1CAD17F400944C48 /* RNLeftAndRightHeaderFooterView.xib in Resources */,
+				E73D86B61CAD2A7B003022AA /* GoogleService-Info.plist in Resources */,
 				E79B92901CAD07B20006F282 /* Assets.xcassets in Resources */,
 				E79B928E1CAD07B20006F282 /* Main.storyboard in Resources */,
 			);
@@ -304,6 +319,7 @@
 				E7BC0F3E1CAD17F400944C48 /* SocialFacebook.swift in Sources */,
 				E7BC0F481CAD17F400944C48 /* SocialVK.swift in Sources */,
 				E7BC0F3D1CAD17F400944C48 /* ShareViewController.swift in Sources */,
+				E73D86B21CAD2377003022AA /* SocialGoogle.swift in Sources */,
 				E7BC0F451CAD17F400944C48 /* SocialNetworkManager.swift in Sources */,
 				E7BC0F441CAD17F400944C48 /* SocialHelper.swift in Sources */,
 				E7BC0F431CAD17F400944C48 /* SocialConstants.swift in Sources */,
@@ -423,7 +439,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SocialNetworks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Flatstack.Social;
+				PRODUCT_BUNDLE_IDENTIFIER = flatstack.social;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SocialNetworks/SocialNetworks-Bridging-Header.h";
@@ -440,7 +456,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SocialNetworks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Flatstack.Social;
+				PRODUCT_BUNDLE_IDENTIFIER = flatstack.social;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SocialNetworks/SocialNetworks-Bridging-Header.h";

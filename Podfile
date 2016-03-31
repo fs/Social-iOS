@@ -14,6 +14,9 @@ pod 'TwitterKit'
 pod 'TwitterCore'
 pod 'twitter-text'
 
+#google
+pod 'Google/SignIn'
+
 #other
 pod 'Fabric'
 pod 'Crashlytics'

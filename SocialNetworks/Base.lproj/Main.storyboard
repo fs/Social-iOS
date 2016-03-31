@@ -28,16 +28,16 @@
                         <viewControllerLayoutGuide type="bottom" id="qYg-jw-nzu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rKl-RR-vmc">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qpy-mU-FXx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="486"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DataCell" rowHeight="130" id="dFl-zE-eqZ" customClass="DataCell" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="600" height="130"/>
+                                        <rect key="frame" x="0.0" y="86" width="600" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dFl-zE-eqZ" id="yOc-F8-Cv3">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
@@ -93,7 +93,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SocialNetworkConnectingCell" id="Rau-od-rcP" customClass="SocialNetworkConnectingCell" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="216" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rau-od-rcP" id="RQD-hb-lHf">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -139,7 +139,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SocialNetworkEnablingCell" id="a1Z-WT-VHB" customClass="SocialNetworkEnablingCell" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="196" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="260" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a1Z-WT-VHB" id="QeP-gi-rIw">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -181,7 +181,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SocialNetworkUploading" id="Sgu-vP-mpE" customClass="SocialNetworkUploading" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="304" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sgu-vP-mpE" id="LVy-JF-TgU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -221,7 +221,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SocialNetworkText" id="dMB-k6-QtT" customClass="SocialNetworkText" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="284" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="348" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dMB-k6-QtT" id="dgQ-aj-GaD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -283,7 +283,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PromptCell" id="1xe-em-P1L" customClass="PromptCell" customModule="SocialNetworks" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="392" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1xe-em-P1L" id="BDq-kq-iNC">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -315,7 +315,7 @@
                                 </connections>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0h-ku-CvK">
-                                <rect key="frame" x="0.0" y="486" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9DJ-xJ-8rd">
                                         <rect key="frame" x="15" y="6" width="570" height="38"/>
@@ -352,7 +352,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="a0h-ku-CvK" secondAttribute="bottom" id="2Tz-j0-4Fr"/>
                             <constraint firstItem="Qpy-mU-FXx" firstAttribute="leading" secondItem="rKl-RR-vmc" secondAttribute="leading" id="4kE-qQ-ugF"/>
-                            <constraint firstItem="Qpy-mU-FXx" firstAttribute="top" secondItem="SIm-Ke-aU7" secondAttribute="bottom" id="JoB-fj-6Kr"/>
+                            <constraint firstItem="Qpy-mU-FXx" firstAttribute="top" secondItem="SIm-Ke-aU7" secondAttribute="bottom" constant="-64" id="JoB-fj-6Kr"/>
                             <constraint firstAttribute="trailing" secondItem="a0h-ku-CvK" secondAttribute="trailing" id="MLy-UB-azZ"/>
                             <constraint firstItem="a0h-ku-CvK" firstAttribute="top" secondItem="Qpy-mU-FXx" secondAttribute="bottom" id="Qgu-yQ-Jrt"/>
                             <constraint firstAttribute="trailing" secondItem="Qpy-mU-FXx" secondAttribute="trailing" id="Y0j-fs-OBk"/>
@@ -362,9 +362,7 @@
                             <outletCollection property="gestureRecognizers" destination="51z-T9-oC2" appends="YES" id="YhR-Wq-i1C"/>
                         </connections>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="613-cG-eMY"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="Social" id="613-cG-eMY"/>
                     <connections>
                         <outlet property="sendButton" destination="9DJ-xJ-8rd" id="DTY-za-SAy"/>
                         <outlet property="tableView" destination="Qpy-mU-FXx" id="mxo-wX-VMP"/>
