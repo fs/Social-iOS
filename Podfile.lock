@@ -1,4 +1,25 @@
 PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
     - Bolts/Tasks (= 1.7.0)
@@ -39,6 +60,10 @@ PODS:
   - GoogleSymbolUtilities (1.1.0)
   - GoogleUtilities (1.2.0):
     - GoogleSymbolUtilities (~> 1.0)
+  - PinterestSDK (1.0):
+    - AFNetworking (~> 2.3)
+    - SSKeychain
+  - SSKeychain (1.4.0)
   - twitter-text (1.13.4)
   - TwitterCore (1.15.3):
     - Fabric
@@ -53,12 +78,23 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Google/SignIn
+  - PinterestSDK (from `https://github.com/pinterest/ios-pdk.git`)
   - twitter-text
   - TwitterCore
   - TwitterKit
   - VK-ios-sdk
 
+EXTERNAL SOURCES:
+  PinterestSDK:
+    :git: https://github.com/pinterest/ios-pdk.git
+
+CHECKOUT OPTIONS:
+  PinterestSDK:
+    :commit: 94ce20bfb62f48d192e85f6bcb09723b9ae28698
+    :git: https://github.com/pinterest/ios-pdk.git
+
 SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
@@ -73,6 +109,8 @@ SPEC CHECKSUMS:
   GoogleSignIn: 3d571172b8603be39dcb1705d8217146bb76fe62
   GoogleSymbolUtilities: eb3965ea12710569c7b80db198a39e39b18613f7
   GoogleUtilities: 85f8ad6b251544286a97163133d042ec95f889c5
+  PinterestSDK: dacc554d7d5ef7110b8285e3cb6ecff4d5012a8c
+  SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
   twitter-text: 66e7b9925534ade86cb3cb2751788073de8f2fec
   TwitterCore: cce24b3c798993ccde72787ea79ea9a478b284e4
   TwitterKit: 43600f2d2848c227739efea5b2939585e69339c3

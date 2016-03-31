@@ -59,11 +59,13 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "SSKeychain/Support/en.lproj"
   install_resource "TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
   install_resource "VK-ios-sdk/VKSdkResources.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "SSKeychain/Support/en.lproj"
   install_resource "TwitterKit/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"
   install_resource "VK-ios-sdk/VKSdkResources.bundle"
 fi
