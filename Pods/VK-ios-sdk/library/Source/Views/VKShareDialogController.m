@@ -142,6 +142,7 @@
 @property(nonatomic, strong) UICollectionView *attachmentsCollection;
 @property(nonatomic, strong) VKPlaceholderTextView *textView;
 @property(nonatomic, strong) VKLinkAttachView *linkAttachView;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @end
 
 ///-------------------------------
@@ -192,7 +193,7 @@ static const CGFloat ipadHeight = 500.f;
 
         [self addChildViewController:self.internalNavigation];
 
-        _requestedScope = @[VK_PER_WALL, VK_PER_PHOTOS];
+        _requestedScope = ([VKSdk accessToken] && [VKSdk accessToken].permissions.count > 0) ? [VKSdk accessToken].permissions : @[VK_PER_WALL, VK_PER_PHOTOS];
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnavailableInDeploymentTarget"
         if (VK_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
@@ -664,7 +665,12 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
         buttonBg = VKImageNamed(@"BlueBtn_pressed");
         buttonBg = [buttonBg stretchableImageWithLeftCapWidth:(NSInteger) floorf(buttonBg.size.width / 2) topCapHeight:(NSInteger) floorf(buttonBg.size.height / 2)];
         [_notAuthorizedButton setBackgroundImage:buttonBg forState:UIControlStateHighlighted];
-
+        
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.center = self.center;
+        _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+        _activityIndicator.hidesWhenStopped = YES;
+        [self addSubview:_activityIndicator];
     }
 
     _contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -722,7 +728,7 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
     if (self.notAuthorizedView.superview) {
         self.notAuthorizedView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
         CGSize notAuthorizedTextBoundingSize = CGSizeMake(CGRectGetWidth(self.notAuthorizedView.frame) - 20, CGFLOAT_MAX);
-        CGSize notAuthorizedTextSize;
+        CGSize notAuthorizedTextSize = CGSizeMake(0,0);
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnavailableInDeploymentTarget"
         if (VK_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
@@ -815,7 +821,6 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
 
 - (void)dealloc {
     [[VKSdk instance] unregisterDelegate:self];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma clang diagnostic push
@@ -871,28 +876,44 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
     [super viewWillAppear:animated];
     if (self.prepared) return;
     VKShareDialogView *view = (VKShareDialogView *) self.view;
+    view.textView.hidden = YES;
+    [view.activityIndicator startAnimating];
     [VKSdk wakeUpSession:self.parent.requestedScope completeBlock:^(VKAuthorizationState state, NSError *error) {
-        if (state == VKAuthorizationAuthorized) {
-            [view.notAuthorizedView removeFromSuperview];
-            view.textView.text = self.parent.text;
-            [self prepare];
-        } else {
-            [self setNotAuthorized];
-        }
+        [self setAuthorizationState:state];
     }];
 }
 
-- (void)setNotAuthorized {
+- (void)setAuthorizationState:(VKAuthorizationState) state {
     VKShareDialogView *view = (VKShareDialogView *) self.view;
-    [view addSubview:view.notAuthorizedView];
-    if ([VKSdk accessToken]) {
-        view.notAuthorizedLabel.text = VKLocalizedString(@"UserHasNoRequiredPermissions");
+    
+    [view.activityIndicator stopAnimating];
+    switch (state) {
+        case VKAuthorizationAuthorized: {
+            [self prepare];
+            
+            [view.notAuthorizedView removeFromSuperview];
+            view.textView.hidden = NO;
+            view.textView.text = self.parent.text;
+            [view textViewDidChange:view.textView];
+            break;
+        }
+        case VKAuthorizationPending: {
+            [view.notAuthorizedView removeFromSuperview];
+            [view.activityIndicator startAnimating];
+            view.textView.hidden = YES;
+            break;
+        }
+        default: {
+            VKShareDialogView *view = (VKShareDialogView *) self.view;
+            [view addSubview:view.notAuthorizedView];
+            if ([VKSdk accessToken]) {
+                view.notAuthorizedLabel.text = VKLocalizedString(@"UserHasNoRequiredPermissions");
+                view.textView.hidden = YES;
+            }
+            [view setNeedsDisplay];
+            break;
+        }
     }
-    [view layoutSubviews];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(viewWillAppear:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
 }
 
 #pragma clang diagnostic push
@@ -1025,13 +1046,15 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
 }
 
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
-    if (result.error) {
-        [self setNotAuthorized];
-    }
+    [self setAuthorizationState:result.state];
+}
+
+- (void)vkSdkAuthorizationStateUpdatedWithResult:(VKAuthorizationResult *)result {
+    [self setAuthorizationState:result.state];
 }
 
 - (void)vkSdkUserAuthorizationFailed {
-    [self setNotAuthorized];
+    [self setAuthorizationState:VKAuthorizationError];
 }
 
 #pragma mark -Attachments
@@ -1059,6 +1082,7 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
             attach.attachmentString = photo.attachmentString;
             attach.uploadingRequest = nil;
             [self.attachmentsScrollView reloadData];
+            [shareDialogView setNeedsLayout];
         }];
         [uploadRequest setErrorBlock:^(NSError *error) {
             NSLog(@"Error: %@", error.vkError);
@@ -1084,8 +1108,8 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
             attachById[photo] = attach;
         }
 
-        VKRequest *req = [VKRequest requestWithMethod:@"photos.getById" andParameters:@{@"photos" : [self.parent.vkImages componentsJoinedByString:@","], @"photo_sizes" : @1} modelClass:[VKPhotoArray class]];
-        [req setCompleteBlock:^(VKResponse *res) {
+        VKRequest *req = [VKRequest requestWithMethod:@"photos.getById" parameters:@{@"photos" : [self.parent.vkImages componentsJoinedByString:@","], @"photo_sizes" : @1} modelClass:[VKPhotoArray class]];
+        [req executeWithResultBlock:^(VKResponse *res) {
             VKPhotoArray *photos = res.parsedModel;
             NSArray *requiredSizes = @[@"p", @"q", @"m"];
             for (VKPhoto *photo in photos) {
@@ -1097,12 +1121,12 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
                 if (!photoSrc) {
                     continue;
                 }
-
+                
                 NSString *photoId = [NSString stringWithFormat:@"%@_%@", photo.owner_id, photo.id];
                 VKUploadingAttachment *attach = attachById[photoId];
-
+                
                 [attachById removeObjectForKey:photoId];
-
+                
                 VKHTTPOperation *imageLoad = [[VKHTTPOperation alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:photoSrc]]];
                 [imageLoad setCompletionBlockWithSuccess:^(VKHTTPOperation *operation, id responseObject) {
                     UIImage *result = [UIImage imageWithData:operation.responseData];
@@ -1114,9 +1138,9 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
                         [self.attachmentsScrollView performBatchUpdates:^{
                             [self.attachmentsScrollView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
                         }                                    completion:nil];
-
+                        
                     });
-
+                    
                 }                                failure:^(VKHTTPOperation *operation, NSError *error) {
                     [self removeAttachIfExists:attach];
                     [self.attachmentsScrollView reloadData];
@@ -1134,10 +1158,12 @@ static const CGFloat kAttachmentsViewSize = 100.0f;
                 }
             }                                    completion:nil];
             [self.attachmentsScrollView reloadData];
+        } errorBlock:^(NSError *error) {
+            NSLog(@"%@", error);
         }];
-        [req start];
     }
     [self.attachmentsScrollView reloadData];
+    [shareDialogView setNeedsLayout];
 
     if (self.parent.shareLink) {
         [shareDialogView setShareLink:self.parent.shareLink];
