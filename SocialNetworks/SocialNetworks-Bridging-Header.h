@@ -20,3 +20,4 @@
 
 //pinterest SDK
 #import <PinterestSDK/PinterestSDK.h>
+#import <PinterestSDK/PDKBoard.h>

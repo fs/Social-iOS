@@ -35,18 +35,18 @@ extension TwitterNetwork: PostToWallAction {
     
     public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
-        let twitterSocialData = TwitterSocialData()
-        twitterSocialData.text = text
-        twitterSocialData.url = url
+        let socialData = TwitterSocialData()
+        socialData.text = text
+        socialData.url = url
         
         if let lImage = image {
             let twitterImage = SocialImage(image: lImage) { (image) -> NSData in
                 return UIImageJPEGRepresentation(image, 1.0)!
             }
-            twitterSocialData.image = twitterImage
+            socialData.image = twitterImage
         }
         
-        return self.postDataToWall(twitterSocialData, completion: completion, failure: failure)
+        return self.postDataToWall(socialData, completion: completion, failure: failure)
     }
 }
 

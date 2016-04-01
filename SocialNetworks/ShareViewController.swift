@@ -191,7 +191,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared, GoogleNetwork.shared, SocialPinterest.shared] }()
+    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared, GoogleNetwork.shared, PinterestNetwork.shared] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
