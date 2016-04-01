@@ -1,38 +1,6 @@
 import UIKit
 
-//MARK: - FacebookSocialData and metadata
-public final class FacebookImageLink {
-    public var pictureToURL: NSURL
-    public var name: String?
-    public var description: String?
-    
-    public init (pictureToURL: NSURL) {
-        self.pictureToURL = pictureToURL
-    }
-}
-
-
-public final class FacebookSocialData: SocialData {
-    public var text: String?
-    public var url: NSURL?
-    public var imageLink: FacebookImageLink? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.image = nil
-            }
-        }
-    }
-    public var image: SocialImage? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.imageLink = nil
-            }
-        }
-    }
-}
-
-
-//MARK: - FacebookNetwork
+//MARK: -
 public final class FacebookNetwork: NSObject {
     
     public static var permissions: [String] = ["publish_actions"]
@@ -55,6 +23,7 @@ public final class FacebookNetwork: NSObject {
     }
 }
 
+//MARK: -
 extension FacebookNetwork: SocialNetwork {
     
     public class var name: String {
@@ -88,5 +57,3 @@ extension FacebookNetwork: SocialNetwork {
         }
     }
 }
-
-

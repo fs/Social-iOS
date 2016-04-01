@@ -71,7 +71,7 @@ internal extension UIImage {
     }
 }
 
-//MARK:- Square image
+//MARK:- crop an image as square
 internal extension UIImage {
     
     internal func social_cropSquare(size: CGSize) -> UIImage! {

@@ -191,7 +191,7 @@ class ShareViewController: UIViewController {
     let message = Message()
     
     //MARK: - private params
-    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared, GoogleNetwork.shared] }()
+    private lazy var socialNetworks: [SocialNetwork] = { return [FacebookNetwork.shared, TwitterNetwork.shared, VKNetwork.shared, GoogleNetwork.shared, PinterestNetwork.shared] }()
     private var isDisplayZeroAccuntsError: Bool = false
     
     //MARK: - life cycle
@@ -473,10 +473,11 @@ extension ShareViewController: UITableViewDataSource {
         case SectionsEnum.socialNetworks.rawValue:
             if self.isAuthNetwork(indexPath.row) == true {
                 let socialNetwork = self.socialNetworks[indexPath.row]
-                socialNetwork.dynamicType.logout(nil)
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
+                socialNetwork.dynamicType.logout({ 
+                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Right)
+                })
             }
-            
+    
         default:
             break
         }

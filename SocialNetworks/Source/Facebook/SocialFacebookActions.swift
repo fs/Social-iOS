@@ -1,5 +1,37 @@
 import UIKit
 
+//MARK: - FacebookSocialData and metadata
+public final class FacebookImageLink {
+    public var pictureToURL: NSURL
+    public var name: String?
+    public var description: String?
+    
+    public init (pictureToURL: NSURL) {
+        self.pictureToURL = pictureToURL
+    }
+}
+
+
+public final class FacebookSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL?
+    public var imageLink: FacebookImageLink? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.image = nil
+            }
+        }
+    }
+    public var image: SocialImage? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.imageLink = nil
+            }
+        }
+    }
+}
+
+//MARK: -
 extension FacebookNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
@@ -15,22 +47,22 @@ extension FacebookNetwork: PostToWallAction {
     
     public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
-        let facebookSocialData = FacebookSocialData()
-        facebookSocialData.text = text
-        facebookSocialData.url = url
+        let socialData = FacebookSocialData()
+        socialData.text = text
+        socialData.url = url
         
         if let lImage = image {
             let facebookImage = SocialImage.init(image: lImage, representationHandler: { (image) -> NSData in
                 return UIImageJPEGRepresentation(image, 1.0)!
             })
-            facebookSocialData.image = facebookImage
+            socialData.image = facebookImage
         }
         
-        return self.postDataToWall(facebookSocialData, completion: completion, failure: failure)
+        return self.postDataToWall(socialData, completion: completion, failure: failure)
     }
 }
 
-//MARK: - FacebookPostToWallOperation
+//MARK: - 
 public final class FacebookPostToWallOperation : SocialOperation {
     
     public let socialData: FacebookSocialData

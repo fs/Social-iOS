@@ -1,5 +1,25 @@
 import UIKit
 
+//MARK: - TwitterSocialData and metadata
+public final class TwitterSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.image = nil
+            }
+        }
+    }
+    public var image: SocialImage? {
+        willSet(newValue) {
+            if newValue != nil {
+                self.url = nil
+            }
+        }
+    }
+}
+
+//MARK: -
 extension TwitterNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
@@ -15,18 +35,18 @@ extension TwitterNetwork: PostToWallAction {
     
     public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
-        let twitterSocialData = TwitterSocialData()
-        twitterSocialData.text = text
-        twitterSocialData.url = url
+        let socialData = TwitterSocialData()
+        socialData.text = text
+        socialData.url = url
         
         if let lImage = image {
             let twitterImage = SocialImage(image: lImage) { (image) -> NSData in
                 return UIImageJPEGRepresentation(image, 1.0)!
             }
-            twitterSocialData.image = twitterImage
+            socialData.image = twitterImage
         }
         
-        return self.postDataToWall(twitterSocialData, completion: completion, failure: failure)
+        return self.postDataToWall(socialData, completion: completion, failure: failure)
     }
 }
 

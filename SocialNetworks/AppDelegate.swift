@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        //setting Twitter
         Twitter.sharedInstance().startWithConsumerKey("Z6wHgmgcU1xZwrQp88Hu26lCu", consumerSecret: "tjVMKUHfIvtwWL5fBJirDCp3J6CoG3nGxftdupaijIznjJ256C")
         
         //setting Fabric
@@ -25,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         //setting VK
         VKSdk.initializeWithAppId("5057927")
+        
+        //setting Pinterest
+        PDKClient.configureSharedInstanceWithAppId("4826493886171988686")
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -59,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             return true
         }
         
+        if PDKClient.sharedInstance().handleCallbackURL(url) {
+            return true
+        }
+        
         if VKSdk.processOpenURL(url, fromApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String) {
             return true
         }
@@ -68,11 +76,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
+        if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) {
+            return true
+        }
+        
         if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
         }
         
-        if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) {
+        if PDKClient.sharedInstance().handleCallbackURL(url) {
             return true
         }
         

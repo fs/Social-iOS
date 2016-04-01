@@ -28,6 +28,8 @@
 		E7BC0F471CAD17F400944C48 /* SocialTwitterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC0F371CAD17F400944C48 /* SocialTwitterActions.swift */; };
 		E7BC0F481CAD17F400944C48 /* SocialVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC0F391CAD17F400944C48 /* SocialVK.swift */; };
 		E7BC0F491CAD17F400944C48 /* SocialVKActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC0F3A1CAD17F400944C48 /* SocialVKActions.swift */; };
+		E7D7C4621CAD3EF300BCCB09 /* SocialPinterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C4611CAD3EF300BCCB09 /* SocialPinterest.swift */; };
+		E7D7C4651CAD63B700BCCB09 /* SocialPinterestActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7C4641CAD63B700BCCB09 /* SocialPinterestActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		E7BC0F371CAD17F400944C48 /* SocialTwitterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialTwitterActions.swift; sourceTree = "<group>"; };
 		E7BC0F391CAD17F400944C48 /* SocialVK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVK.swift; sourceTree = "<group>"; };
 		E7BC0F3A1CAD17F400944C48 /* SocialVKActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialVKActions.swift; sourceTree = "<group>"; };
+		E7D7C4611CAD3EF300BCCB09 /* SocialPinterest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialPinterest.swift; sourceTree = "<group>"; };
+		E7D7C4641CAD63B700BCCB09 /* SocialPinterestActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialPinterestActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +134,8 @@
 		E79B929E1CAD13FD0006F282 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E73D86B51CAD2A7B003022AA /* GoogleService-Info.plist */,
 				E79B92941CAD07B20006F282 /* Info.plist */,
+				E73D86B51CAD2A7B003022AA /* GoogleService-Info.plist */,
 				E79B929A1CAD0D0B0006F282 /* SocialNetworks-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -140,16 +144,15 @@
 		E7BC0F2B1CAD17F400944C48 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E7BC0F2F1CAD17F400944C48 /* Social+UIImage.swift */,
 				E7BC0F301CAD17F400944C48 /* Social.swift */,
 				E7BC0F311CAD17F400944C48 /* SocialActions.swift */,
-				E7BC0F321CAD17F400944C48 /* SocialConstants.swift */,
-				E7BC0F331CAD17F400944C48 /* SocialHelper.swift */,
 				E7BC0F341CAD17F400944C48 /* SocialNetworkManager.swift */,
+				E7D7C4631CAD3F3800BCCB09 /* Internal helper */,
 				E7BC0F2C1CAD17F400944C48 /* Facebook */,
 				E7BC0F351CAD17F400944C48 /* Twitter */,
 				E73D86B01CAD2377003022AA /* Google */,
 				E7BC0F381CAD17F400944C48 /* VK */,
+				E7D7C4601CAD3EAF00BCCB09 /* Pinterest */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -189,6 +192,25 @@
 				E7BC0F291CAD17F400944C48 /* RNLeftAndRightHeaderFooterView.xib */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E7D7C4601CAD3EAF00BCCB09 /* Pinterest */ = {
+			isa = PBXGroup;
+			children = (
+				E7D7C4611CAD3EF300BCCB09 /* SocialPinterest.swift */,
+				E7D7C4641CAD63B700BCCB09 /* SocialPinterestActions.swift */,
+			);
+			path = Pinterest;
+			sourceTree = "<group>";
+		};
+		E7D7C4631CAD3F3800BCCB09 /* Internal helper */ = {
+			isa = PBXGroup;
+			children = (
+				E7BC0F321CAD17F400944C48 /* SocialConstants.swift */,
+				E7BC0F331CAD17F400944C48 /* SocialHelper.swift */,
+				E7BC0F2F1CAD17F400944C48 /* Social+UIImage.swift */,
+			);
+			name = "Internal helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,11 +343,13 @@
 				E7BC0F3D1CAD17F400944C48 /* ShareViewController.swift in Sources */,
 				E73D86B21CAD2377003022AA /* SocialGoogle.swift in Sources */,
 				E7BC0F451CAD17F400944C48 /* SocialNetworkManager.swift in Sources */,
+				E7D7C4621CAD3EF300BCCB09 /* SocialPinterest.swift in Sources */,
 				E7BC0F441CAD17F400944C48 /* SocialHelper.swift in Sources */,
 				E7BC0F431CAD17F400944C48 /* SocialConstants.swift in Sources */,
 				E7BC0F491CAD17F400944C48 /* SocialVKActions.swift in Sources */,
 				E7BC0F421CAD17F400944C48 /* SocialActions.swift in Sources */,
 				E7BC0F401CAD17F400944C48 /* Social+UIImage.swift in Sources */,
+				E7D7C4651CAD63B700BCCB09 /* SocialPinterestActions.swift in Sources */,
 				E7BC0F3F1CAD17F400944C48 /* SocialFacebookActions.swift in Sources */,
 				E7BC0F3B1CAD17F400944C48 /* RNLeftAndRightHeaderFooterView.swift in Sources */,
 				E7BC0F411CAD17F400944C48 /* Social.swift in Sources */,

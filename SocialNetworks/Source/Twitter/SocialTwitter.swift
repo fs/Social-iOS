@@ -1,25 +1,6 @@
 import UIKit
 
-//MARK: - TwitterSocialData and metadata
-public final class TwitterSocialData: SocialData {
-    public var text: String?
-    public var url: NSURL? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.image = nil
-            }
-        }
-    }
-    public var image: SocialImage? {
-        willSet(newValue) {
-            if newValue != nil {
-                self.url = nil
-            }
-        }
-    }
-}
-
-//MARK: - TwitterNetwork
+//MARK: -
 private let twUserIDKey = "__twUserIDKey__"
 
 public class TwitterNetwork: NSObject {
@@ -59,7 +40,7 @@ public class TwitterNetwork: NSObject {
     }
 }
 
-//MARK: - SocialNetwork
+//MARK: -
 extension TwitterNetwork: SocialNetwork {
     
     public class var name: String {

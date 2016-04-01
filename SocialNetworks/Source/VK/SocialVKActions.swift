@@ -1,5 +1,23 @@
 import Foundation
 
+//MARK: - VKSocialData and metadata
+public final class VKImage {
+    public let image: UIImage
+    public let parameters: VKImageParameters
+    
+    public init (image: UIImage, parameters: VKImageParameters) {
+        self.image = image
+        self.parameters = parameters
+    }
+}
+
+public final class VKSocialData: SocialData {
+    public var text: String?
+    public var url: NSURL?
+    public var image: VKImage?
+}
+
+//MARK: -
 extension VKNetwork: PostToWallAction {
     
     public func postDataToWall(socialData: SocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
@@ -15,16 +33,16 @@ extension VKNetwork: PostToWallAction {
     
     public func postDataToWall(text: String, image: UIImage?, url: NSURL?, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) -> SocialOperation {
         
-        let vkSocialData = VKSocialData()
-        vkSocialData.text = text
-        vkSocialData.url = url
+        let socialData = VKSocialData()
+        socialData.text = text
+        socialData.url = url
         
         if let lImage = image {
             let vkImage = VKImage(image: lImage, parameters: VKImageParameters.jpegImageWithQuality(1.0))
-            vkSocialData.image = vkImage
+            socialData.image = vkImage
         }
         
-        return self.postDataToWall(vkSocialData, completion: completion, failure: failure)
+        return self.postDataToWall(socialData, completion: completion, failure: failure)
     }
 }
 
@@ -35,7 +53,7 @@ public final class VKPostToWallOperation : SocialOperation {
     
     private weak var request: VKRequest?
     
-    @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: TwitterSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
+    @available(*, unavailable, message = "init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) is unavailable, use init(socialData: VKSocialData, completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock)")
     override internal init(completion: SocialOperationCompletionBlock, failure: SocialOperationFailureBlock) {
         fatalError("It doesn't work")
     }

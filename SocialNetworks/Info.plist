@@ -60,6 +60,16 @@
 				<string>flatstack.social</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>pinterest</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pdk4826493886171988686</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -101,6 +111,7 @@
 		<string>vk</string>
 		<string>vk-share</string>
 		<string>vkauthorize</string>
+        <string>pinterestsdk.v1</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -145,6 +156,13 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+            <key>pinit</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <false/>
+            </dict>
 		</dict>
 	</dict>
 	<key>UIMainStoryboardFile</key>

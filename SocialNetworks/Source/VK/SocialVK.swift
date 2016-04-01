@@ -1,23 +1,6 @@
 import UIKit
 
-//MARK: - VKSocialData and metadata
-public final class VKImage {
-    public let image: UIImage
-    public let parameters: VKImageParameters
-    
-    public init (image: UIImage, parameters: VKImageParameters) {
-        self.image = image
-        self.parameters = parameters
-    }
-}
-
-public final class VKSocialData: SocialData {
-    public var text: String?
-    public var url: NSURL?
-    public var image: VKImage?
-}
-
-//MARK: - VKNetwork
+//MARK: -
 private let defaultDelegate = VKNetworkDelegate.init()
 private let uiDefaultDelegate = VKNetworkUIDelegate.init()
 
