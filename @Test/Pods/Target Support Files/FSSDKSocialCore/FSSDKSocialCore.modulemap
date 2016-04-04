@@ -1,0 +1,6 @@
+framework module FSSDKSocialCore {
+  umbrella header "FSSDKSocialCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

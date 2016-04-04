@@ -1,0 +1,40 @@
+{
+  "name": "FSSDKSocialGoogle",
+  "version": "2.0",
+  "summary": "Official Social SDK for iOS from Flatstack for Google",
+  "homepage": "http://www.flatstack.com",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "VladimirGoncharov": "vladimir1631@yandex.ru"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/fs/Social-iOS.git",
+    "tag": "2.0"
+  },
+  "source_files": "SocialNetworks/Source/Google/*.{swift}",
+  "weak_frameworks": [
+    "QuartzCore",
+    "CoreGraphics",
+    "UIKit",
+    "Foundation"
+  ],
+  "prefix_header_contents": [
+    "#import \"Google/Core.h\"",
+    "#import \"GoogleSignIn.h\""
+  ],
+  "requires_arc": true,
+  "dependencies": {
+    "Google/SignIn": [
+      "~> 2.0"
+    ],
+    "FSSDKSocialCore": [
+
+    ]
+  }
+}

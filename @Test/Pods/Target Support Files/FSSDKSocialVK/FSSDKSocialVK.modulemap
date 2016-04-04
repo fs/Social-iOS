@@ -1,0 +1,6 @@
+framework module FSSDKSocialVK {
+  umbrella header "FSSDKSocialVK-umbrella.h"
+
+  export *
+  module * { export * }
+}

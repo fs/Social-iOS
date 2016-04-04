@@ -1,0 +1,6 @@
+framework module FSSDKSocialGoogle {
+  umbrella header "FSSDKSocialGoogle-umbrella.h"
+
+  export *
+  module * { export * }
+}

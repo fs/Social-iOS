@@ -1,0 +1,6 @@
+framework module FSSDKSocialTwitter {
+  umbrella header "FSSDKSocialTwitter-umbrella.h"
+
+  export *
+  module * { export * }
+}

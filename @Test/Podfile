@@ -1,0 +1,14 @@
+platform :ios, '8.0'
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+pre_install do |installer|
+    # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+    def installer.verify_no_static_framework_transitive_dependencies; end
+end
+
+pod 'FSSDKSocialFacebook', :path => '../FSSDKSocialFacebook.podspec'
+pod 'FSSDKSocialTwitter', :path => '../FSSDKSocialTwitter.podspec'
+pod 'FSSDKSocialVK', :path => '../FSSDKSocialVK.podspec'
+pod 'FSSDKSocialGoogle', :path => '../FSSDKSocialGoogle.podspec'
+#pod 'FSSDKSocialPinterest', :path => '../FSSDKSocialPinterest.podspec'

@@ -1,0 +1,6 @@
+framework module FSSDKSocialFacebook {
+  umbrella header "FSSDKSocialFacebook-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "FSSDKSocialPinterest",
+  "version": "2.0",
+  "summary": "Official Social SDK for iOS from Flatstack for Pinterest",
+  "homepage": "http://www.flatstack.com",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "VladimirGoncharov": "vladimir1631@yandex.ru"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/fs/Social-iOS.git",
+    "tag": "2.0"
+  },
+  "source_files": "SocialNetworks/Source/Pinterest/*.{swift}",
+  "weak_frameworks": [
+    "QuartzCore",
+    "CoreGraphics",
+    "UIKit",
+    "Foundation"
+  ],
+  "requires_arc": true,
+  "dependencies": {
+    "FSSDKSocialCore": [
+
+    ]
+  }
+}
