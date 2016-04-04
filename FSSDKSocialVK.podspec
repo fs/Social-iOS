@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialVK"
-  s.version      = "1.0.1"
+  s.version      = "2.0"
   s.summary      = "Official Social SDK for iOS from Flatstack"
 
   s.homepage     = "http://www.flatstack.com"
@@ -75,7 +75,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Social/Source/VK/*.{swift}"
+  s.source_files  = "SocialNetworks/Source/VK/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -119,7 +119,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "VK-ios-sdk", "<= 1.3.7"
-  s.dependency "FSSDKSocialCore", "~> 1.0"
+  s.dependency 'VK-ios-sdk', '~> 1.3'
+
+  s.dependency 'FSSDKSocialCore'
 
 end

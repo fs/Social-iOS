@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint FSSDKSocialFacebook.podspec' to ensure this is a
+#  Be sure to run `pod spec lint FSSDKSocialGoogle.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "FSSDKSocialFacebook"
+  s.name         = "FSSDKSocialGoogle"
   s.version      = "2.0"
-  s.summary      = "Official Social SDK for iOS from Flatstack for Facebook"
+  s.summary      = "Official Social SDK for iOS from Flatstack for Google"
 
   s.homepage     = "http://www.flatstack.com"
 
@@ -72,15 +72,13 @@ Pod::Spec.new do |s|
   #  CocoaPods is smart about how it includes source code. For source files
   #  giving a folder will include any swift, h, m, mm, c & cpp files.
   #  For header files it will include any header in the folder.
-  #  Not§ including the public_header_files will make all headers public.
+  #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "SocialNetworks/Source/Facebook/*.{swift}"
+  s.source_files  = "SocialNetworks/Source/Google/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
-
-  # s.prefix_header_contents = '#import <FacebookSDK/FacebookSDK.h>', '@import FSSDKSocialCore'
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -105,6 +103,8 @@ Pod::Spec.new do |s|
 
   s.weak_frameworks = "QuartzCore", "CoreGraphics", "UIKit", "Foundation"
 
+  s.prefix_header_contents = '#import "Google/Core.h"', '#import "GoogleSignIn.h"'
+
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
@@ -121,11 +121,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  s.dependency 'Google/SignIn', '~> 2.0'
 
-  s.dependency 'FBSDKCoreKit', '~> 4.10'
-  s.dependency 'FBSDKLoginKit', '~> 4.10'
-  s.dependency 'FBSDKShareKit', '~> 4.10'
-
-  s.dependency "FSSDKSocialCore"
+  s.dependency 'FSSDKSocialCore'
 
 end

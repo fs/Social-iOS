@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialCore"
-  s.version      = "1.0.1"
-  s.summary      = "Official Social SDK for iOS from Flatstack"
+  s.version      = "2.0"
+  s.summary      = "Official Social core SDK for iOS from Flatstack"
 
   s.description  = <<-DESC
 			The library provides the management of social networks as one. 
@@ -79,8 +79,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Social/Source/*.{swift}"
-  # s.exclude_files = "Classes/Exclude"
+  s.source_files  = "SocialNetworks/Source/*.{swift}"
+  # s.exclude_files = 	"SocialNetworks/Source/File1.swift",
+  #			"SocialNetworks/Source/File2.swift",
 
   # s.public_header_files = "Classes/**/*.h"
   # s.module_name = "FSSDKSocialCore"

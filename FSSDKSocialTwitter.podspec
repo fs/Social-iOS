@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "FSSDKSocialTwitter"
-  s.version      = "1.0.1"
-  s.summary      = "Official Social SDK for iOS from Flatstack"
+  s.version      = "2.0"
+  s.summary      = "Official Social SDK for iOS from Flatstack for Twitter"
 
   s.homepage     = "http://www.flatstack.com"
 
@@ -75,11 +75,10 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Social/Source/Twitter/*.{swift}"
+  s.source_files  = "SocialNetworks/Source/Twitter/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
-
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -119,9 +118,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "TwitterKit", "<= 1.13.1"
-  s.dependency "TwitterCore", "<= 1.13.1"
-  s.dependency "twitter-text", "<= 1.13.0"
-  s.dependency "FSSDKSocialCore", "~> 1.0"
+
+  s.dependency 'TwitterKit', '~> 1.15'
+  s.dependency 'TwitterCore', '~> 1.15'
+  s.dependency 'twitter-text', '~> 1.13'
+
+  s.dependency 'FSSDKSocialCore'
 
 end
